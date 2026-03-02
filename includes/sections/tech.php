@@ -22,12 +22,18 @@ $tech_stack = [
         <div class="tech-grid mt-3 tech-grid-5">
             
             <?php 
-            $delay = 100;
+            $index = 0;
             foreach ($tech_stack as $tech): 
-                $delayClass = "delay-" . min($delay, 500);
+                $colIndex = $index % 5; 
+                
+                // Even columns (0, 2, 4) from top (reveal-down), Odd columns (1, 3) from bottom (reveal-up)
+                $revealClass = ($colIndex % 2 == 0) ? 'reveal-down' : 'reveal-up';
+                
+                // Stagger delay based on column position (0 to 4)
+                $delayClass = "delay-" . (($colIndex + 1) * 100);
             ?>
                 <!-- Added tech-hover-float for extra floating animation -->
-                <div class="tech-flip-card tech-hover-float reveal-up <?= $delayClass ?>">
+                <div class="tech-flip-card tech-hover-float <?= $revealClass ?> <?= $delayClass ?>">
                     <div class="tech-flip-inner">
                         <div class="tech-flip-front glass">
                             <!-- Image container fetching from external CDN -->
@@ -44,8 +50,7 @@ $tech_stack = [
                     </div>
                 </div>
             <?php 
-                $delay += 100;
-                if ($delay > 500) $delay = 100; // Reset stagger for the second row
+                $index++;
             endforeach; 
             ?>
 

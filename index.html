@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arnanda Setya | Terminal Entry</title>
+    <!-- Importing Lucide Icons & Google Fonts for consistency -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Reset & Variables matched with portfolio */
+        :root {
+            --bg-main: #060b14;
+            --primary: #14b8a6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle animated background grid */
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-size: 50px 50px;
+            background-image:
+                linear-gradient(rgba(20, 184, 166, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
+            z-index: 0;
+            opacity: 0.3;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Main Container */
+        .intro-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        /* Terminal Text Styling */
+        .terminal-box {
+            background: rgba(11, 17, 32, 0.7);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(20, 184, 166, 0.05);
+            margin-bottom: 2rem;
+            width: 100%;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: bootUp 1s ease-out forwards 0.5s;
+        }
+
+        @keyframes bootUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .code-line {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+            opacity: 0;
+        }
+
+        /* Entry Button */
+        .enter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: rgba(20, 184, 166, 0.1);
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+            text-decoration: none;
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: popIn 0.8s ease-out forwards 3s; /* Delays until typing ends */
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--primary);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .enter-btn:hover {
+            color: #0b1120;
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .enter-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .enter-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .enter-btn:hover i {
+            transform: translateX(5px);
+            color: #0b1120;
+        }
+
+        /* Exit Animation triggers via JS */
+        body.fade-out {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="grid-bg"></div>
+
+    <div class="intro-container">
+        
+        <div class="terminal-box" id="terminal">
+            <span class="code-line text-primary" style="opacity: 1;">> Initializing connection...</span>
+            <span class="code-line" id="line1">> Loading developer profile: Arnanda Setya</span>
+            <span class="code-line" id="line2">> Extracting project modules... 100%</span>
+            <span class="code-line" id="line3">> Compiling experience assets... Done.</span>
+            <span class="code-line" id="line4" style="color: var(--primary); font-weight: bold; margin-top: 10px;">> System ready. Access granted.</span>
+        </div>
+
+        <a href="portfolio.php" class="enter-btn" id="enterBtn">
+            <span>Enter Portfolio</span>
+            <i data-lucide="arrow-right"></i>
+        </a>
+
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Terminal Typing Animation Sequence
+        document.addEventListener('DOMContentLoaded', () => {
+            const lines = [
+                document.getElementById('line1'),
+                document.getElementById('line2'),
+                document.getElementById('line3'),
+                document.getElementById('line4')
+            ];
+
+            let delay = 1200; // Start after bootUp animation
+            
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.style.opacity = '1';
+                }, delay);
+                delay += 500; // 500ms between each line appearance
+            });
+        });
+
+        // Smooth Exit Page Transition
+        const enterBtn = document.getElementById('enterBtn');
+        enterBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop instant redirect
+            document.body.classList.add('fade-out'); // Trigger CSS fade
+            
+            // Wait for fade to finish, then navigate
+            setTimeout(() => {
+                window.location.href = enterBtn.getAttribute('href');
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>

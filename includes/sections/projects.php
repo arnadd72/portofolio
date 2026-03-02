@@ -19,11 +19,11 @@
 
         <div class="project-grid mt-3">
             <?php 
-            $delay = 100;
+            $index = 0;
             foreach ($projects as $proj): 
-                $delayClass = "delay-" . min($delay, 500); // Cap at delay-500
+                $delayClass = "delay-" . (($index % 5 + 1) * 100); 
             ?>
-                <div class="project-card glass hover-glow hover-lift reveal-up <?= $delayClass ?>"
+                <div class="project-card glass hover-lift hover-glow reveal-up <?= $delayClass ?>"
                     data-category="<?= htmlspecialchars($proj['category']) ?>">
 
                     <div class="project-img-wrapper">
@@ -46,7 +46,9 @@
                                 <span class="tag">
                                     <?= htmlspecialchars(trim($tag)) ?>
                                 </span>
-                            <?php endforeach; ?>
+                            <?php
+                                $index++;
+                            endforeach; ?>
                         </div>
 
                         <div class="project-links mt-2">
@@ -65,7 +67,6 @@
                     </div>
                 </div>
             <?php 
-            $delay += 100;
             endforeach; 
             ?>
         </div>

@@ -28,7 +28,7 @@
 
     <header class="navbar glass magnetic-wrap">
         <div class="nav-container">
-            <a href="#" class="logo magnetic-el">Arn<span>anda</span></a>
+            <a href="index.html" class="logo magnetic-el" title="Back to Intro">Arn<span>anda</span></a>
             <nav class="nav-links">
                 <a href="#hero" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About</a>

@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- 7. SCROLL REVEAL & SKILL BARS ---
-    const reveals = document.querySelectorAll('.reveal, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale, .project-card, .tech-card, .tech-flip-card');
+    const reveals = document.querySelectorAll('.reveal, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip, .project-card, .tech-card, .tech-flip-card');
     const skillBars = document.querySelectorAll('.skill-progress');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

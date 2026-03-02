@@ -10,7 +10,7 @@
             </span>
             <h1 class="hero-title">
                 Halo, Saya <br>
-                <span class="text-primary">Arnanda Setya</span>
+                <span class="text-primary">Arnanda Setya Nosa Putra</span>
             </h1>
             <h2 class="hero-role mt-1">
                 <span class="highlight typing-text"></span>
