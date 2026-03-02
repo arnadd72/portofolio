@@ -2,16 +2,17 @@
 // includes/sections/contact.php
 ?>
 <section id="contact" class="section contact-section">
-    <div class="container reveal">
-        <div class="contact-wrapper glass glass-tilt p-3">
-            <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="container reveal-scale">
+        <div class="contact-wrapper glass hover-glow p-3">
+            <h2 class="section-title">Hubungi <span>Saya</span></h2>
+            <p class="text-muted mt-1" style="margin-bottom: 10px;">Punya pertanyaan, ide proyek, atau sekadar ingin menyapa? Saya senang mendengar dari Anda. Isi formulir di bawah dan saya akan segera membalas.</p>
 
             <form id="contactForm" class="mt-3">
                 <input type="text" name="honeypot"
                     style="display:none" autocomplete="off">
 
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">Nama</label>
                     <input type="text" id="name" name="name"
                         required class="form-control">
                 </div>
@@ -23,13 +24,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="subject">Subject</label>
+                    <label for="subject">Subjek</label>
                     <input type="text" id="subject" name="subject"
                         required class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="message">Message</label>
+                    <label for="message">Pesan</label>
                     <textarea id="message" name="message" rows="5"
                         required class="form-control"></textarea>
                 </div>
@@ -38,7 +39,7 @@
                     class="btn btn-primary w-100 magnetic-el"
                     id="submitBtn">
                     <i data-lucide="send" class="icon-sm"></i>
-                    Send Message
+                    Kirim Pesan
                 </button>
             </form>
         </div>

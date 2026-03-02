@@ -3,21 +3,27 @@
 // Variabel $projects sudah dipanggil dari data.php di index.php utama
 ?>
 <section id="projects" class="section">
-    <div class="container reveal">
-        <h2 class="section-title text-center">My <span>Projects</span></h2>
-
-        <div class="filter-container text-center mt-2">
-            <button class="filter-btn active magnetic-el"
-                data-filter="all">All</button>
-            <button class="filter-btn magnetic-el"
-                data-filter="Web">Web</button>
-            <button class="filter-btn magnetic-el"
-                data-filter="API">API</button>
+    <div class="container">
+        <div class="reveal-down">
+            <h2 class="section-title text-center">Proyek <span>Saya</span></h2>
+            
+            <div class="filter-container text-center mt-2">
+                <button class="filter-btn active magnetic-el"
+                    data-filter="all">Semua</button>
+                <button class="filter-btn magnetic-el"
+                    data-filter="Web">Web</button>
+                <button class="filter-btn magnetic-el"
+                    data-filter="API">API</button>
+            </div>
         </div>
 
         <div class="project-grid mt-3">
-            <?php foreach ($projects as $proj): ?>
-                <div class="project-card glass glass-tilt hover-lift"
+            <?php 
+            $delay = 100;
+            foreach ($projects as $proj): 
+                $delayClass = "delay-" . min($delay, 500); // Cap at delay-500
+            ?>
+                <div class="project-card glass hover-glow hover-lift reveal-up <?= $delayClass ?>"
                     data-category="<?= htmlspecialchars($proj['category']) ?>">
 
                     <div class="project-img-wrapper">
@@ -58,7 +64,10 @@
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php 
+            $delay += 100;
+            endforeach; 
+            ?>
         </div>
     </div>
 </section>

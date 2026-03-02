@@ -2,6 +2,12 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    // --- 0. FORCE SCROLL TO TOP ON REFRESH ---
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // --- 1. WELCOME SCREEN ANIMATION SUTRADARA ---
     const welcomeScreen = document.getElementById('welcome-screen');
     const typeWriterEl = document.getElementById('w-typewriter');
@@ -46,57 +52,73 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- 2. FUNGSI TYPING UNTUK HERO SECTION ---
     function startHeroTyping() {
         const typingText = document.querySelector('.typing-text');
-        const textToType = "Arnanda Setya Nosa Putra"; 
+        const roles = ["Web Developer", "Mobile Developer"];
+        let roleIndex = 0;
         let charIndex = 0;
+        let isDeleting = false;
+
         function type() {
-            if (typingText && charIndex < textToType.length) {
-                typingText.textContent += textToType.charAt(charIndex);
+            if (!typingText) return;
+
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentRole.substring(0, charIndex + 1);
                 charIndex++;
-                setTimeout(type, 100);
             }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                // Pause at the end of the word
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                // Move to next word when deleted
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
         }
-        setTimeout(type, 800); // Mulai ngetik 0.8 detik setelah layar terbuka
+        
+        setTimeout(type, 800); // Wait 0.8s before starting
     }
 
-    // --- 3. CUSTOM GLOWING CURSOR ---
-    const cursorDot = document.querySelector('[data-cursor-dot]');
-    const cursorOutline = document.querySelector('[data-cursor-outline]');
-    
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
+    // --- 2.5 ROTATING QUOTES ---
+    const quotes = [
+        { text: '"Satu-satunya cara untuk melakukan pekerjaan hebat adalah dengan mencintai apa yang Anda lakukan."', author: "Steve Jobs" },
+        { text: '"Kode yang baik adalah dokumentasi terbaiknya sendiri. Seiring Anda mulai menambahkan komentar, tanyakan pada diri Anda: Bagaimana saya bisa membuat kode ini lebih mudah dipahami?"', author: "Steve McConnell" },
+        { text: '"Desain bukan sekadar apa yang terlihat dan terasa. Desain adalah bagaimana ia berfungsi."', author: "Steve Jobs" }
+    ];
+    let quoteIndex = 0;
+    const quoteContainer = document.querySelector('.hero-quote-text');
+    const quoteTextSpan = document.getElementById('quoteText');
+    const quoteAuthorSpan = document.getElementById('quoteAuthor');
 
-            if(cursorDot) {
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-            }
-
-            if(cursorOutline) {
-                cursorOutline.animate({
-                    left: `${posX}px`,
-                    top: `${posY}px`
-                }, { duration: 500, fill: "forwards" });
-            }
-        });
-
-        document.querySelectorAll('a, button, .hover-lift').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if(cursorOutline) {
-                    cursorOutline.style.width = '60px';
-                    cursorOutline.style.height = '60px';
-                    cursorOutline.style.backgroundColor = 'rgba(20, 184, 166, 0.1)';
-                }
-            });
-            el.addEventListener('mouseleave', () => {
-                if(cursorOutline) {
-                    cursorOutline.style.width = '40px';
-                    cursorOutline.style.height = '40px';
-                    cursorOutline.style.backgroundColor = 'transparent';
-                }
-            });
-        });
+    if (quoteContainer && quoteTextSpan && quoteAuthorSpan) {
+        setInterval(() => {
+            // Fade out
+            quoteContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Change text while invisible
+                quoteIndex = (quoteIndex + 1) % quotes.length;
+                quoteTextSpan.textContent = quotes[quoteIndex].text;
+                quoteAuthorSpan.textContent = quotes[quoteIndex].author;
+                
+                // Fade in
+                quoteContainer.style.opacity = '1';
+            }, 800); // match the CSS transition duration
+        }, 8000); // change every 5 seconds
     }
+
+    // --- 3. (CURSOR REMOVED - USING DEFAULT BROWSER CURSOR) ---
+
 
     // --- 4. MAGNETIC BUTTONS ---
     const magneticEls = document.querySelectorAll('.magnetic-el, .btn');
@@ -160,9 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- 7. SCROLL REVEAL & SKILL BARS ---
-    const reveals = document.querySelectorAll('.reveal, .project-card, .tech-card');
+    const reveals = document.querySelectorAll('.reveal, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale, .project-card, .tech-card, .tech-flip-card');
     const skillBars = document.querySelectorAll('.skill-progress');
-    const observer = new IntersectionObserver((entries, obs) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
@@ -171,7 +193,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         bar.style.width = bar.getAttribute('data-width');
                     });
                 }
-                obs.unobserve(entry.target);
+            } else {
+                // Remove active class when out of view so it animates again!
+                entry.target.classList.remove('active');
             }
         });
     }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
@@ -243,13 +267,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const navbar = document.querySelector('.navbar');
 
     if (hamburger) hamburger.addEventListener('click', () => navLinks.classList.toggle('show'));
-    if (localStorage.getItem('theme') === 'light') html.setAttribute('data-theme', 'light');
     
+    // Enforce dark mode as absolute default if no preference is saved
+    if (localStorage.getItem('theme') === 'light') {
+        html.setAttribute('data-theme', 'light');
+    } else {
+        html.removeAttribute('data-theme'); // default to dark
+    }
+    
+    // Set initial icon state
+    function updateThemeIcon() {
+        if (!themeBtn) return;
+        const currentTheme = html.getAttribute('data-theme');
+        const iconName = currentTheme === 'light' ? 'sun' : 'moon';
+        themeBtn.innerHTML = `<i data-lucide="${iconName}" class="icon-sm"></i>`;
+        lucide.createIcons();
+    }
+    updateThemeIcon();
+
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
             const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
+            updateThemeIcon();
         });
     }
 

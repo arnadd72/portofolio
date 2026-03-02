@@ -10,6 +10,7 @@
     <title>Arnanda Setya | Premium Portfolio</title>
 
     <link rel="stylesheet" href="assets/css/main.css?v=<?= time(); ?>">
+    <link rel="stylesheet" href="assets/css/animations.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/welcome.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/home.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/about.css?v=<?= time(); ?>">
@@ -17,8 +18,7 @@
 </head>
 
 <body>
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
+
 
     <div class="scroll-progress-container">
         <div class="scroll-progress-bar" id="scrollProgress"></div>
@@ -28,13 +28,13 @@
 
     <header class="navbar glass magnetic-wrap">
         <div class="nav-container">
-            <a href="#" class="logo magnetic-el">Port<span>folio</span></a>
+            <a href="#" class="logo magnetic-el">Arn<span>anda</span></a>
             <nav class="nav-links">
-                <a href="#hero" class="magnetic-el">Home</a>
-                <a href="#about" class="magnetic-el">About</a>
-                <a href="#tech" class="magnetic-el">Tech</a>
-                <a href="#projects" class="magnetic-el">Projects</a>
-                <a href="#contact" class="magnetic-el">Contact</a>
+                <a href="#hero" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#tech" class="nav-link">Tech</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
                 <button id="theme-toggle" class="btn-icon magnetic-el">
                     <i data-lucide="moon" class="icon-sm"></i>
                 </button>
