@@ -23,7 +23,8 @@
             foreach ($projects as $proj): 
                 $delayClass = "delay-" . (($index % 5 + 1) * 100); 
             ?>
-                <div class="project-card glass hover-lift hover-glow reveal-up <?= $delayClass ?>"
+                <div class="project-card glass hover-lift hover-glow <?= $delayClass ?>"
+                    data-aos="zoom-in-up" data-aos-anchor-placement="top-center" data-aos-duration="800"
                     data-category="<?= htmlspecialchars($proj['category']) ?>">
 
                     <div class="project-img-wrapper">
@@ -53,15 +54,15 @@
 
                         <div class="project-links mt-2">
                             <a href="<?= htmlspecialchars($proj['demo_link']) ?>"
-                                target="_blank" class="link-btn magnetic-el">
-                                <i data-lucide="external-link"
-                                    class="icon-sm"></i> Demo
+                                target="_blank" class="link-btn magnetic-el" style="display:flex; align-items:center;">
+                                <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Rocket.png" 
+                                     alt="Demo" style="width:20px; height:20px; margin-right:6px;" /> Demo
                             </a>
                             <a href="<?= htmlspecialchars($proj['github_link']) ?>"
                                 target="_blank"
-                                class="link-btn outline magnetic-el">
-                                <i data-lucide="github"
-                                    class="icon-sm"></i> GitHub
+                                class="link-btn outline magnetic-el" style="display:flex; align-items:center;">
+                                <img src="https://skillicons.dev/icons?i=github" 
+                                     alt="GitHub" style="width:20px; height:20px; margin-right:6px; border-radius:50%;" /> GitHub
                             </a>
                         </div>
                     </div>

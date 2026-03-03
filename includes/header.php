@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="assets/css/main.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/animations.css?v=<?= time(); ?>">
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/welcome.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/home.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/about.css?v=<?= time(); ?>">

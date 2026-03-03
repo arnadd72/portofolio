@@ -18,7 +18,7 @@
             </a>
         </div>
         <p style="color: var(--text-muted); font-size: 0.9rem;">
-            &copy; <?= date('Y') ?> Arnanda Setya Nosa Putra. Dirancang & Dibangun dengan ❤️ menggunakan PHP & JS.
+            &copy; <?= date('Y') ?> Arnanda Setya Nosa Putra. Dirancang & Dibangun dengan <i data-lucide="heart" class="icon-sm" style="display:inline-block; color:var(--primary); margin: 0 2px;"></i> menggunakan PHP & JS.
         </p>
     </div>
 </footer>
@@ -29,6 +29,16 @@
 <script>
     // Inisialisasi Lucide agar tag <i> berubah jadi SVG
     lucide.createIcons();
+</script>
+
+<!-- AOS Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: false,
+        mirror: true
+    });
 </script>
 
 <script src="assets/js/main.js" defer></script>

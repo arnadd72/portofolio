@@ -12,9 +12,9 @@
             
             <div class="about-top-grid">
                 <div class="bio-header">
-                    <span class="greeting-badge">👋 Halo, Pengunjung!</span>
+                    <span class="greeting-badge"><i data-lucide="hand" class="icon-sm" style="display:inline-block; margin-right:5px;"></i> Halo, Pengunjung!</span>
                     <h3 class="bento-title mt-2">Saya <br><span class="text-primary">Arnanda Setya<br>Nosa Putra</span></h3>
-                    <p class="text-muted mt-1" style="font-size: 0.95rem;">Berbasis di Indonesia 🇮🇩</p>
+                    <p class="text-muted mt-1" style="font-size: 0.95rem;">Berbasis di Indonesia <i data-lucide="flag" class="icon-sm" style="display:inline-block; margin-left:5px; color:var(--primary);"></i></p>
                     
                     <div class="bio-actions mt-3 reveal-up delay-200" style="justify-content: flex-start;">
                         <a href="#projects" class="btn btn-primary magnetic-el" style="margin-right: 15px;">
@@ -41,28 +41,28 @@
         </div>
 
         <!-- Kartu Kedua: Apa Yang Saya Lakukan & Fakta Singkat -->
-        <div class="about-content-wrapper glass hover-glow p-4 mt-4 reveal-up delay-200">
+        <div class="about-content-wrapper glass hover-glow p-4 mt-4" data-aos="fade-up" data-aos-duration="1000">
             <!-- Apa Yang Saya Lakukan -->
-            <div class="what-i-do reveal-up delay-400">
+            <div class="what-i-do" data-aos="zoom-in" data-aos-delay="200">
                 <h4 class="text-primary" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px;">
                     <i data-lucide="zap" class="icon-sm"></i> Apa Yang Saya Lakukan
                 </h4>
                 <div class="services-grid">
-                    <div class="service-item glass reveal-left delay-200">
+                    <div class="service-item glass" data-aos="fade-up" data-aos-delay="300">
                         <i data-lucide="globe" class="service-icon"></i>
                         <div>
                             <strong>Web Development</strong>
                             <p class="text-muted text-sm">Membangun website responsif, cepat, dan modern dengan kode bersih dan praktik terbaik.</p>
                         </div>
                     </div>
-                    <div class="service-item glass reveal-scale delay-300">
+                    <div class="service-item glass" data-aos="zoom-in" data-aos-delay="400">
                         <i data-lucide="smartphone" class="service-icon"></i>
                         <div>
                             <strong>Mobile Development</strong>
                             <p class="text-muted text-sm">Membuat aplikasi mobile lintas platform menggunakan Flutter dan teknologi terkini.</p>
                         </div>
                     </div>
-                    <div class="service-item glass reveal-right delay-400">
+                    <div class="service-item glass" data-aos="fade-up" data-aos-delay="500">
                         <i data-lucide="palette" class="service-icon"></i>
                         <div>
                             <strong>UI/UX Design</strong>
@@ -74,23 +74,23 @@
             
             <!-- Fakta Singkat -->
             <div class="quick-facts mt-4">
-                <div class="fact-item reveal-left delay-200">
+                <div class="fact-item" data-aos="zoom-in" data-aos-delay="300">
                     <span class="fact-number highlight">Mahasiswa</span>
                     <span class="fact-label">Teknik<br>Informatika</span>
                 </div>
-                <div class="fact-item reveal-up delay-300">
+                <div class="fact-item" data-aos="fade-up" data-aos-delay="400">
                     <span class="fact-number highlight">Web & Mobile</span>
                     <span class="fact-label">Minat<br>Utama</span>
                 </div>
-                <div class="fact-item reveal-down delay-400">
+                <div class="fact-item" data-aos="zoom-in" data-aos-delay="500">
                     <span class="fact-number highlight">Intermediate</span>
                     <span class="fact-label">Level<br>Pengalaman</span>
                 </div>
-                <div class="fact-item reveal-up delay-500">
+                <div class="fact-item" data-aos="fade-up" data-aos-delay="600">
                     <span class="fact-number highlight">10+</span>
                     <span class="fact-label">Teknologi<br>Dipelajari</span>
                 </div>
-                <div class="fact-item reveal-right delay-600">
+                <div class="fact-item" data-aos="zoom-in" data-aos-delay="700">
                     <span class="fact-number highlight">5+</span>
                     <span class="fact-label">Proyek<br>Selesai</span>
                 </div>
