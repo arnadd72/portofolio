@@ -1,30 +1,35 @@
 /* assets/css/main.css */
 :root {
-    --primary: #14b8a6;
-    --primary-hover: #0d9488;
-    --secondary: #34d399;
-    --bg-main: #0b1120;
-    --bg-surface: rgba(30, 41, 59, 0.4);
-    --bg-surface-hover: rgba(30, 41, 59, 0.6);
+    --primary: #8b5cf6;
+    /* Vibrant Neon Purple */
+    --primary-hover: #7c3aed;
+    --secondary: #06b6d4;
+    /* Bright Cyan */
+    --bg-main: #0f172a;
+    /* Slate 900 - Lighter than pitch black/generic dark */
+    --bg-surface: rgba(30, 41, 59, 0.75);
+    /* Frosted Slate glass */
+    --bg-surface-hover: rgba(30, 41, 59, 0.95);
     --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --border-glass: rgba(20, 184, 166, 0.15);
-    --border-glow: rgba(20, 184, 166, 0.5);
-    --glow-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+    --text-muted: #cbd5e1;
+    --border-glass: rgba(139, 92, 246, 0.2);
+    /* Purple tinted glass border */
+    --border-glow: rgba(139, 92, 246, 0.6);
+    --glow-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
 }
 
 [data-theme="light"] {
-    --primary: #0f766e;
-    --primary-hover: #115e59;
-    --secondary: #10b981;
-    --bg-main: #f8fafc;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary: #0d9488;
+    --bg-main: #f4f4f5;
     --bg-surface: rgba(255, 255, 255, 0.8);
     --bg-surface-hover: rgba(255, 255, 255, 0.95);
     --text-main: #0f172a;
     --text-muted: #475569;
-    --border-glass: rgba(15, 118, 110, 0.2);
-    --border-glow: rgba(15, 118, 110, 0.4);
-    --glow-shadow: 0 0 20px rgba(15, 118, 110, 0.1);
+    --border-glass: rgba(0, 0, 0, 0.08);
+    --border-glow: rgba(0, 0, 0, 0.2);
+    --glow-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -39,7 +44,7 @@ html {
 }
 
 body {
-    background-color: var(--bg-main);
+    background-color: transparent !important;
     color: var(--text-main);
     line-height: 1.7;
     overflow-x: hidden;
@@ -155,6 +160,9 @@ body {
 
 .section {
     padding: 30px 0;
+    position: relative;
+    /* Ensure relative for z-indexing if needed */
+    z-index: 10;
 }
 
 .text-center {
@@ -179,6 +187,9 @@ body {
     border: 1px solid var(--border-glass);
     border-radius: 16px;
     transition: var(--transition-smooth);
+    position: relative;
+    z-index: 20;
+    /* Keep content above particles */
 }
 
 .glass-tilt {
@@ -380,13 +391,15 @@ body {
 .nav-links {
     display: flex;
     gap: 30px;
+    align-items: center;
 }
 
 .nav-links a {
     color: var(--text-muted);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.95rem;
+    /* Ensure normal font size */
     transition: color 0.3s ease;
 }
 

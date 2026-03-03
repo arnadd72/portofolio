@@ -1,0 +1,89 @@
+<!-- includes/sections/welcome.html -->
+<div id="welcome-screen" class="welcome-container">
+    <div class="welcome-bg-glow glow-1"></div>
+    <div class="welcome-bg-glow glow-2"></div>
+
+    <div class="welcome-card">
+        <!-- Inline SVG Astronaut - No external image needed, loads instantly -->
+        <div class="welcome-3d-wrapper">
+            <div class="css-astronaut-container">
+                <svg class="astro-svg" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Backpack -->
+                    <rect x="60" y="75" width="80" height="100" rx="12" fill="#334155" stroke="#475569" stroke-width="2"/>
+                    <rect x="70" y="85" width="20" height="12" rx="3" fill="#06b6d4" opacity="0.6"/>
+                    <rect x="70" y="102" width="20" height="12" rx="3" fill="#8b5cf6" opacity="0.6"/>
+                    <circle cx="130" cy="95" r="4" fill="#06b6d4" opacity="0.8">
+                        <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="130" cy="112" r="4" fill="#22d3ee" opacity="0.8">
+                        <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+
+                    <!-- Body / Suit -->
+                    <rect x="55" y="100" width="90" height="110" rx="20" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"/>
+                    <!-- Suit chest detail -->
+                    <rect x="75" y="120" width="50" height="30" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+                    <rect x="85" y="126" width="30" height="6" rx="3" fill="#06b6d4" opacity="0.5"/>
+                    <rect x="85" y="136" width="20" height="6" rx="3" fill="#8b5cf6" opacity="0.5"/>
+
+                    <!-- Helmet -->
+                    <ellipse cx="100" cy="75" rx="45" ry="50" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"/>
+                    <!-- Visor -->
+                    <ellipse cx="100" cy="72" rx="35" ry="38" fill="url(#visorGrad)"/>
+                    <!-- Visor reflection -->
+                    <ellipse cx="88" cy="60" rx="12" ry="15" fill="rgba(255,255,255,0.15)" transform="rotate(-15 88 60)"/>
+
+                    <!-- Arms -->
+                    <rect x="20" y="115" width="40" height="18" rx="9" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2" transform="rotate(-15 40 124)"/>
+                    <rect x="140" y="115" width="40" height="18" rx="9" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2" transform="rotate(15 160 124)"/>
+                    <!-- Gloves -->
+                    <circle cx="22" cy="118" r="10" fill="#cbd5e1" transform="rotate(-15 40 124)"/>
+                    <circle cx="178" cy="118" r="10" fill="#cbd5e1" transform="rotate(15 160 124)"/>
+
+                    <!-- Legs -->
+                    <rect x="65" y="200" width="25" height="50" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"/>
+                    <rect x="110" y="200" width="25" height="50" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"/>
+                    <!-- Boots -->
+                    <rect x="60" y="240" width="35" height="20" rx="8" fill="#94a3b8"/>
+                    <rect x="105" y="240" width="35" height="20" rx="8" fill="#94a3b8"/>
+
+                    <!-- Glow effects -->
+                    <defs>
+                        <radialGradient id="visorGrad" cx="50%" cy="40%">
+                            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.9"/>
+                            <stop offset="50%" stop-color="#8b5cf6" stop-opacity="0.7"/>
+                            <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.95"/>
+                        </radialGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Visor glow ring -->
+                    <ellipse cx="100" cy="72" rx="37" ry="40" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.4" filter="url(#glow)"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="welcome-card-content">
+            <span class="welcome-greeting anim-fade-up">Initiating Sequence...</span>
+            <h1 class="welcome-heading anim-fade-up delay-1">
+                Welcome To My<br>
+                <span class="text-primary">Portfolio.</span>
+            </h1>
+            
+            <div class="welcome-loading-area anim-fade-up delay-2">
+                <div class="loading-bar-container">
+                    <div class="loading-bar-progress" id="welcome-progress"></div>
+                </div>
+                <div class="loading-text">
+                    <span id="welcome-status">Calibrating engines...</span>
+                    <span id="welcome-percent">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

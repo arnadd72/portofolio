@@ -6,87 +6,129 @@ document.addEventListener("DOMContentLoaded", () => {
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
-
-    // --- 1. WELCOME SCREEN ANIMATION SUTRADARA ---
+    // --- 1. ASTRONAUT 3D WELCOME SCREEN SUTRADARA ---
     const welcomeScreen = document.getElementById('welcome-screen');
-    const typeWriterEl = document.getElementById('w-typewriter');
+    const welcomeProgress = document.getElementById('welcome-progress');
+    const welcomePercent = document.getElementById('welcome-percent');
     
-    if (welcomeScreen) {
+    if (welcomeScreen && welcomeProgress && welcomePercent) {
         // Kunci scroll saat welcome screen aktif
         document.body.classList.add('no-scroll');
         
-        // Logika Typewriter Welcome Screen
-        const welcomeText = "Arnanda Setya";
-        let wIndex = 0;
-        function welcomeType() {
-            if (typeWriterEl && wIndex < welcomeText.length) {
-                typeWriterEl.textContent += welcomeText.charAt(wIndex);
-                wIndex++;
-                setTimeout(welcomeType, 150);
-            }
-        }
-        setTimeout(welcomeType, 2500);
-
-        // Menunggu 4.5 detik lalu hilangkan welcome screen
-        setTimeout(() => {
-            welcomeScreen.classList.add('exit');
+        let progress = 0;
+        const duration = 3000; // 3 seconds loading simulation
+        const intervalTime = 30;
+        const increment = (100 / (duration / intervalTime));
+        
+        const loadingInterval = setInterval(() => {
+            progress += increment;
             
-            setTimeout(() => {
-                welcomeScreen.style.display = 'none';
-                document.body.classList.remove('no-scroll');
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(loadingInterval);
+                document.getElementById('welcome-status').textContent = "Launch successful.";
                 
-                // KUNCI RAHASIA: Trigger animasi website utama!
-                document.body.classList.add('welcome-done');
-                
-                // Mulai ngetik teks di Hero Section
-                startHeroTyping();
-            }, 800);
-        }, 4500);
+                // Menunggu sejenak setelah 100% lalu hilangkan welcome screen
+                setTimeout(() => {
+                    welcomeScreen.classList.add('exit'); // Mengaktifkan CSS transition fade + blur
+                    
+                    setTimeout(() => {
+                        welcomeScreen.style.display = 'none';
+                        document.body.classList.remove('no-scroll');
+                        
+                        // KUNCI RAHASIA: Memulai GSAP animasi website utama
+                        document.body.classList.add('welcome-done');
+                        startHeroTyping();
+                    }, 800);
+                }, 800);
+            }
+            
+            // Update UI elements
+            welcomeProgress.style.width = `${progress}%`;
+            welcomePercent.textContent = `${Math.floor(progress)}%`;
+            
+        }, intervalTime);
+
     } else {
         // Jika tidak ada welcome screen, langsung jalankan web utama
         document.body.classList.add('welcome-done');
         startHeroTyping();
     }
 
-    // --- 2. FUNGSI TYPING UNTUK HERO SECTION ---
+    // --- 2. FUNGSI TYPING UNTUK HERO SECTION & GSAP ANIMATION ---
     function startHeroTyping() {
-        const typingText = document.querySelector('.typing-text');
-        const roles = ["Web Developer", "Mobile Developer"];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            if (!typingText) return;
-
-            const currentRole = roles[roleIndex];
-            
-            if (isDeleting) {
-                typingText.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingText.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentRole.length) {
-                // Pause at the end of the word
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                // Move to next word when deleted
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
-        }
         
-        setTimeout(type, 800); // Wait 0.8s before starting
+        // --- GSAP TIMELINE ---
+        if (typeof gsap !== 'undefined') {
+            const tl = gsap.timeline();
+            
+            // 1. Reveal text elements one by one from top to bottom
+            tl.to('.gsap-reveal', {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+
+            // 2. Reveal the 3D Spline viewer with a smooth pop effect
+            tl.to('.gsap-reveal-3d', {
+                scale: 1,
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'back.out(1.5)'
+            }, "-=0.6"); // overlap slightly with text animation
+            
+            // 3. Start typing effect after the text containers are visible
+            tl.call(initTypingEffect);
+        } else {
+            // Fallback: Show elements instantly if GSAP fails to load
+            document.querySelectorAll('.gsap-reveal, .gsap-reveal-3d').forEach(el => {
+                el.style.opacity = 1;
+                el.style.transform = 'none';
+            });
+            initTypingEffect();
+        }
+
+        function initTypingEffect() {
+            const typingText = document.querySelector('.typing-text');
+            const roles = ["Web Developer", "Mobile Developer"];
+            let roleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                if (!typingText) return;
+
+                const currentRole = roles[roleIndex];
+                
+                if (isDeleting) {
+                    typingText.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingText.textContent = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let typeSpeed = isDeleting ? 50 : 100;
+
+                if (!isDeleting && charIndex === currentRole.length) {
+                    // Pause at the end of the word
+                    typeSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    // Move to next word when deleted
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    typeSpeed = 500;
+                }
+
+                setTimeout(type, typeSpeed);
+            }
+            
+            setTimeout(type, 500);
+        }
     }
 
     // --- 2.5 ROTATING QUOTES ---
@@ -164,6 +206,60 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         });
     });
+
+    // --- 5.5 ADVANCED 3D PROFILE CARD EFFECT ---
+    const profileCard = document.getElementById('profile-card');
+    const profileCardWrapper = document.getElementById('profile-card-wrapper');
+    
+    if (profileCard && profileCardWrapper) {
+        let bounds;
+        
+        function rotateToMouse(e) {
+            bounds = profileCard.getBoundingClientRect();
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const leftX = mouseX - bounds.left;
+            const topY = mouseY - bounds.top;
+            
+            const center = {
+                x: leftX - bounds.width / 2,
+                y: topY - bounds.height / 2
+            };
+            
+            const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
+            
+            profileCard.style.setProperty('--pointer-x', `${(leftX / bounds.width) * 100}%`);
+            profileCard.style.setProperty('--pointer-y', `${(topY / bounds.height) * 100}%`);
+            
+            profileCard.style.setProperty('--pointer-from-center', clamp(distance / (bounds.width / 2), 0, 1));
+            profileCard.style.setProperty('--pointer-from-left', clamp(leftX / bounds.width, 0, 1));
+            profileCard.style.setProperty('--pointer-from-top', clamp(topY / bounds.height, 0, 1));
+            
+            // Adjust sensitivity below. Lower multiple = less rotation.
+            profileCard.style.setProperty('--rotate-x', `${(center.y / 100) * -15}deg`);
+            profileCard.style.setProperty('--rotate-y', `${(center.x / 100) * 15}deg`);
+        }
+        
+        const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+        
+        profileCardWrapper.addEventListener('mouseenter', () => {
+            bounds = profileCard.getBoundingClientRect();
+            profileCard.classList.add('interacting');
+            profileCard.style.setProperty('--card-opacity', 1);
+        });
+        
+        profileCardWrapper.addEventListener('mousemove', rotateToMouse);
+        
+        profileCardWrapper.addEventListener('mouseleave', () => {
+            profileCard.classList.remove('interacting');
+            profileCard.style.setProperty('--rotate-x', '0deg');
+            profileCard.style.setProperty('--rotate-y', '0deg');
+            profileCard.style.setProperty('--card-opacity', 0);
+            profileCard.style.setProperty('--pointer-x', '50%');
+            profileCard.style.setProperty('--pointer-y', '50%');
+        });
+    }
 
     // --- 6. SCROLL PROGRESS & PARALLAX HERO ---
     const progressBar = document.getElementById('scrollProgress');
@@ -307,4 +403,70 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+
+    // --- 11. INITIALIZE TSPARTICLES (Meteor Shower / Starfall) ---
+    if (typeof tsParticles !== 'undefined') {
+        tsParticles.load("tsparticles", {
+            background: {
+                color: { value: "transparent" },
+            },
+            fpsLimit: 60,
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: true,
+                        mode: "repulse", // Meteors scatter when cursor approaches
+                    },
+                    resize: true,
+                },
+                modes: {
+                    repulse: {
+                        distance: 120,
+                        duration: 0.4,
+                    },
+                },
+            },
+            particles: {
+                color: {
+                    value: ["#ffffff", "#6366f1", "#14b8a6", "#e2e8f0"],
+                },
+                links: {
+                    enable: false,
+                },
+                move: {
+                    direction: "none", 
+                    enable: true,
+                    outModes: {
+                        default: "out",
+                    },
+                    random: true,
+                    speed: { min: 0.5, max: 2 },
+                    straight: false,
+                },
+                number: {
+                    density: {
+                        enable: true,
+                        area: 800,
+                    },
+                    value: 120, // Optimized for smooth 60fps
+                },
+                opacity: {
+                    value: { min: 0.5, max: 1 },
+                    animation: {
+                        enable: true,
+                        speed: 0.5,
+                        minimumValue: 0.3,
+                        sync: false
+                    }
+                },
+                shape: {
+                    type: "circle",
+                },
+                size: {
+                    value: { min: 1.5, max: 4 }, 
+                }
+            },
+            detectRetina: true,
+        });
+    }
 });

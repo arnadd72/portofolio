@@ -1,37 +1,248 @@
 /* assets/css/welcome.css */
-body.no-scroll { overflow: hidden; }
+body.no-scroll {
+    overflow: hidden;
+}
 
 .welcome-container {
-    position: fixed; inset: 0; background-color: #050b14; z-index: 999999;
-    display: flex; justify-content: center; align-items: center;
-    transition: opacity 0.8s, transform 0.8s, filter 0.8s;
+    position: fixed;
+    inset: 0;
+    background: #0f172a;
+    /* Solid dark background to hide all content behind */
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, filter 0.8s ease;
 }
-.welcome-container.exit { opacity: 0; transform: scale(1.1); filter: blur(10px); pointer-events: none; }
 
-.welcome-bg-glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: pulseGlow 4s infinite alternate; }
-.glow-1 { width: 600px; height: 600px; background: var(--primary); top: -100px; left: -100px; }
-.glow-2 { width: 500px; height: 500px; background: var(--secondary); bottom: -100px; right: -100px; animation-delay: 2s; }
+.welcome-container.exit {
+    opacity: 0;
+    filter: blur(10px);
+    pointer-events: none;
+}
 
-.welcome-content { position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; }
+/* Subtle glowing orbs in the background */
+.welcome-bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    animation: pulseGlow 4s infinite alternate;
+}
 
-.welcome-icons { display: flex; gap: 25px; margin-bottom: 30px; }
-.w-icon-box { padding: 12px; border-radius: 50%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; opacity: 0; transform: translateY(-20px); animation: dropIn 0.5s forwards; }
+.glow-1 {
+    width: 600px;
+    height: 600px;
+    background: #6366f1;
+    top: -100px;
+    left: -100px;
+}
 
-.welcome-line { margin-bottom: 10px; }
-.w-word { display: inline-block; padding: 0 8px; font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; opacity: 0; transform: translateX(-20px); animation: slideInFade 0.6s forwards; }
-.highlight-aqua { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: translateY(20px); animation: slideUpFade 0.6s forwards; }
+.glow-2 {
+    width: 500px;
+    height: 500px;
+    background: #14b8a6;
+    bottom: -100px;
+    right: -100px;
+    animation-delay: 2s;
+}
 
-.welcome-footer { margin-top: 30px; opacity: 0; transform: translateY(20px); animation: slideUpFade 0.6s forwards; }
-.welcome-badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 25px; border-radius: 50px; background: rgba(20, 184, 166, 0.1); border: 1px solid rgba(20, 184, 166, 0.3); font-size: 1.2rem; }
-.w-typewriter-text { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+/* Removed static CSS stars so tsParticles can be seen clearly */
 
-.anim-delay-1 { animation-delay: 0.2s; } .anim-delay-2 { animation-delay: 0.4s; }
-.anim-delay-3 { animation-delay: 0.6s; } .anim-delay-4 { animation-delay: 0.8s; }
-.anim-delay-5 { animation-delay: 1.0s; } .anim-delay-6 { animation-delay: 1.2s; }
-.anim-delay-7 { animation-delay: 1.5s; } .anim-delay-8 { animation-delay: 1.7s; }
-.anim-delay-9 { animation-delay: 2.2s; }
+/* Premium Glassmorphism Card */
+.welcome-card {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 800px;
+    height: 500px;
+    background: rgba(17, 24, 39, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    display: flex;
+    overflow: hidden;
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    transform: scale(0.95);
+    opacity: 0;
+    animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 
-@keyframes dropIn { to { opacity: 1; transform: translateY(0); } }
-@keyframes slideInFade { to { opacity: 1; transform: translateX(0); } }
-@keyframes slideUpFade { to { opacity: 1; transform: translateY(0); } }
-@keyframes pulseGlow { to { transform: scale(1.2); opacity: 0.25; } }
+@keyframes cardEntrance {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Add a subtle internal shine to the card */
+.welcome-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+/* 3D Wrapper takes up the right half (or background on mobile) */
+.welcome-3d-wrapper {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    min-width: 50%;
+}
+
+/* Content Area */
+.welcome-card-content {
+    flex: 1;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-greeting {
+    font-family: 'Fira Code', monospace;
+    color: var(--primary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.welcome-heading {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #f8fafc;
+    margin-bottom: auto;
+    /* Push loading bar to bottom */
+}
+
+.welcome-heading span {
+    background: linear-gradient(to right, #6366f1, #14b8a6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Loading Bar Area */
+.welcome-loading-area {
+    margin-top: 40px;
+}
+
+.loading-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.loading-bar-progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #14b8a6);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+    transition: width 0.1s linear;
+}
+
+.loading-text {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Entrance Animations */
+.anim-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.3s;
+}
+
+.delay-2 {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGlow {
+    to {
+        transform: scale(1.2);
+        opacity: 0.25;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .welcome-card {
+        flex-direction: column;
+        height: auto;
+        max-height: 90vh;
+        width: 95%;
+    }
+
+    .welcome-3d-wrapper {
+        min-width: 100%;
+        height: 200px;
+        min-height: 200px;
+    }
+
+    .astro-svg {
+        width: 150px;
+    }
+
+    .welcome-card-content {
+        padding: 20px;
+    }
+
+    .welcome-heading {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-card {
+        width: 98%;
+        border-radius: 16px;
+    }
+
+    .welcome-3d-wrapper {
+        height: 160px;
+        min-height: 160px;
+    }
+
+    .astro-svg {
+        width: 120px;
+    }
+
+    .welcome-card-content {
+        padding: 15px;
+    }
+
+    .welcome-heading {
+        font-size: 1.3rem;
+    }
+
+    .welcome-greeting {
+        font-size: 0.75rem;
+    }
+}
