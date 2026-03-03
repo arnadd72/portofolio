@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Combined title -->
-    <title>Arnanda Setya | Terminal & Portfolio</title>
+    <title>Arnanda Setya Nosa Putra | Terminal & Portfolio</title>
     
     <!-- CSS Dependencies from index.html (Terminal) -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/welcome.css">
     <link rel="stylesheet" href="assets/css/space.css"> <!-- Custom Space Art -->
+    <link rel="stylesheet" href="assets/css/gooey-buttons.css"> <!-- Gooey Button Animation -->
     
     <!-- SweetAlert2 (Portfolio) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -91,14 +92,51 @@
     <!-- Library Scripts (MUST load before main.js) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@3.3.0/tsparticles.bundle.min.js"></script>
 
     <!-- Core Scripts (loads AFTER all libraries) -->
     <script src="assets/js/main.js"></script>
 
+    <!-- SVG Goo Filter for Gooey Buttons -->
+    <svg width="0" height="0" style="position: absolute;">
+        <filter id="goo" x="-50%" y="-50%" width="200%" height="200%">
+            <feComponentTransfer>
+                <feFuncA type="discrete" tableValues="0 1"/>
+            </feComponentTransfer>
+            <feGaussianBlur stdDeviation="5"/>
+            <feComponentTransfer>
+                <feFuncA type="table" tableValues="-5 11"/>
+            </feComponentTransfer>
+        </filter>
+    </svg>
+
     <script>
         lucide.createIcons();
         AOS.init({ duration: 800, once: false, mirror: true });
+
+        // Gooey buttons: inject background layer + cursor tracking
+        document.querySelectorAll('.gooey-btn').forEach(btn => {
+            // Inject .gooey-bg span (receives SVG filter, keeps text crisp)
+            if (!btn.querySelector('.gooey-bg')) {
+                const bg = document.createElement('span');
+                bg.className = 'gooey-bg';
+                bg.setAttribute('aria-hidden', 'true');
+                btn.insertBefore(bg, btn.firstChild);
+            }
+            // Cursor tracking — blob follows mouse position
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                btn.style.setProperty('--x', x);
+                btn.style.setProperty('--y', y);
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.setProperty('--x', 50);
+                btn.style.setProperty('--y', 50);
+            });
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,226 @@
+/* assets/css/gooey-buttons.css — Gooey Button Animation */
+
+/* CSS Custom Property for animated blob size */
+@property --a {
+    syntax: "<percentage>";
+    initial-value: 0%;
+    inherits: true;
+}
+
+/* ===== GOOEY BUTTON BASE ===== */
+.gooey-btn {
+    --a: 0%;
+    --hue: 270deg;
+    --x: 50;
+    --y: 50;
+    --button: hsl(var(--hue), 66%, 66%);
+    --edge: 0.3em;
+    --btn-size: 0.4em;
+
+    position: relative;
+    background: transparent !important;
+    color: hsla(var(--hue), 80%, 85%, 0.95) !important;
+    border: none !important;
+    cursor: pointer;
+    padding: calc(var(--btn-size)) calc(var(--btn-size) * 1.5);
+    font-size: inherit;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* NO filter on button itself — text stays crisp */
+    animation: gooey-color 20s linear infinite both;
+    transition:
+        --a 0.5s ease-in-out,
+        scale 0.15s ease,
+        color 0.3s ease;
+    z-index: 1;
+}
+
+/* ===== GOOEY BACKGROUND LAYER ===== */
+/* This wrapper receives the SVG filter — keeps text unblurred */
+.gooey-btn .gooey-bg {
+    position: absolute;
+    inset: calc(var(--edge) * -1);
+    z-index: -1;
+    filter: url(#goo);
+    pointer-events: none;
+    border-radius: 12px;
+}
+
+/* Rectangular base shape */
+.gooey-btn .gooey-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--button);
+    border-radius: 12px;
+}
+
+/* Cursor-following blob that merges with the rectangle */
+.gooey-btn .gooey-bg::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: var(--button);
+    /* Center position anchor */
+    top: calc(var(--y) * 1%);
+    left: calc(var(--x) * 1%);
+    transform: translate(-50%, -50%);
+
+    /* Base size is 0 (hidden) */
+    width: 0;
+    height: 0;
+
+    transition:
+        width 0.4s ease-out,
+        height 0.4s ease-out;
+}
+
+/* ===== HOVER STATE ===== */
+.gooey-btn:hover {
+    color: #fff !important;
+    scale: 1.05;
+}
+
+.gooey-btn:active {
+    scale: 0.97;
+}
+
+/* Hover activates the blob */
+.gooey-btn:hover .gooey-bg::after {
+    width: 8em;
+    height: 8em;
+}
+
+.gooey-btn:active {
+    scale: 0.97;
+}
+
+/* ===== HUE ROTATION ===== */
+@keyframes gooey-color {
+    0% {
+        --hue: 270deg;
+    }
+
+    25% {
+        --hue: 190deg;
+    }
+
+    50% {
+        --hue: 300deg;
+    }
+
+    75% {
+        --hue: 210deg;
+    }
+
+    100% {
+        --hue: 270deg;
+    }
+}
+
+/* ===== TEXT STAYS ABOVE ===== */
+.gooey-btn>*:not(.gooey-bg) {
+    position: relative;
+    z-index: 2;
+}
+
+.gooey-btn i,
+.gooey-btn img,
+.gooey-btn svg:not([width="0"]) {
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== VARIANT: PRIMARY ===== */
+.gooey-btn.btn-primary {
+    --hue: 260deg;
+    --button: hsl(260deg, 66%, 58%);
+}
+
+/* ===== VARIANT: OUTLINE ===== */
+.gooey-btn.btn-outline {
+    --hue: 260deg;
+    --button: hsl(260deg, 40%, 42%);
+}
+
+.gooey-btn.btn-outline:hover {
+    color: #fff !important;
+}
+
+/* ===== VARIANT: FILTER BUTTONS ===== */
+.gooey-btn.filter-btn {
+    --hue: 270deg;
+    --button: hsl(270deg, 50%, 50%);
+    --btn-size: 0.25em;
+    --edge: 0.2em;
+    font-size: 0.85rem;
+}
+
+.gooey-btn.filter-btn.active {
+    --a: 100%;
+    color: #fff !important;
+}
+
+/* ===== VARIANT: LINK BUTTONS ===== */
+.gooey-btn.link-btn {
+    --hue: 190deg;
+    --button: hsl(190deg, 60%, 40%);
+    --btn-size: 0.2em;
+    --edge: 0.15em;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+.gooey-btn.link-btn.outline {
+    --hue: 260deg;
+    --button: hsl(260deg, 40%, 38%);
+}
+
+/* ===== VARIANT: SUBMIT BUTTON ===== */
+.gooey-btn.w-100 {
+    width: 100%;
+    justify-content: center;
+    --btn-size: 0.45em;
+}
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"] .gooey-btn {
+    color: hsla(var(--hue), 50%, 30%, 0.95) !important;
+}
+
+[data-theme="light"] .gooey-btn:hover {
+    color: #fff !important;
+}
+
+[data-theme="light"] .gooey-btn.btn-primary {
+    --button: hsl(240deg, 60%, 55%);
+}
+
+[data-theme="light"] .gooey-btn.btn-outline {
+    --button: hsl(240deg, 50%, 50%);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .gooey-btn {
+        --btn-size: 0.25em;
+        --edge: 0.2em;
+        font-size: 0.75rem;
+    }
+
+    .gooey-btn.filter-btn {
+        --btn-size: 0.25em;
+        --edge: 0.2em;
+        font-size: 0.75rem;
+    }
+
+    .gooey-btn.link-btn {
+        --btn-size: 0.2em;
+        --edge: 0.15em;
+        font-size: 0.73rem;
+    }
+}

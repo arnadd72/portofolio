@@ -133,19 +133,280 @@
     }
 }
 
-/* What I Do - Services Grid */
-.services-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
+/* ---------- NEW TIMELINE LAYOUT ---------- */
+
+/* The card style based on GlowCard React Component & CSS provided */
+:root {
+    --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
 }
 
-@media (min-width: 768px) {
-    .services-grid {
-        grid-template-columns: repeat(3, 1fr);
+.card-container {
+    --start: 0;
+    position: relative;
+    z-index: 40;
+    overflow: hidden;
+    transition: border-color 1s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: #0e0e10;
+    /* --color-black-100 */
+}
+
+.card-container::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: var(--gradient);
+    background-attachment: fixed;
+    mask: linear-gradient(#0000, #0000),
+        conic-gradient(from calc((var(--start) - 15) * 1deg),
+            rgba(255, 255, 255, 0.12) 0deg,
+            white,
+            rgba(255, 255, 255, 0) 100deg);
+    mask-composite: intersect;
+    mask-clip: padding-box, border-box;
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.card-container .glow {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(10px) saturate(200%);
+}
+
+.card-container:hover::before {
+    opacity: 1;
+}
+
+.timeline-card-glow-inner {
+    height: 100%;
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.timeline-card-glow-inner i {
+    width: 48px;
+    height: 48px;
+    color: var(--primary);
+}
+
+/* Layout logic */
+.timeline-container {
+    margin-top: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.exp-card-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+    .exp-card-wrapper {
+        flex-direction: row;
+        gap: 0;
+        align-items: flex-start;
+        position: relative;
     }
 }
 
+.exp-left {
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .exp-left {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 2.5rem;
+    }
+
+    .exp-left .card-container {
+        width: 100%;
+        max-width: 380px;
+    }
+}
+
+.exp-right {
+    width: 100%;
+    position: relative;
+}
+
+@media (min-width: 1024px) {
+    .exp-right {
+        width: 50%;
+    }
+}
+
+.timeline-flex-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.timeline-mask-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-right: 1.5rem;
+    width: 14px;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    .timeline-mask-wrapper {
+        margin-right: 2.5rem;
+        width: 14px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .timeline-mask-wrapper {
+        transform: translateX(-50%);
+        /* perfectly centers it between left and right side due to 50% split width */
+        margin-left: 0;
+    }
+}
+
+.timeline {
+    /* The Mask */
+    position: absolute;
+    z-index: 30;
+    height: 110%;
+    top: -10px;
+    width: 100%;
+    /* We use the glass container's background color or similar to mask it out smoothly. 
+     Since the main container has a glass backdrop, we will try to match var(--bg-surface) */
+    background: var(--bg-surface);
+    border-radius: 4px;
+    backdrop-filter: blur(16px);
+}
+
+.gradient-line {
+    width: 4px;
+    /* w-1 */
+    height: 100%;
+    background: linear-gradient(0deg,
+            rgba(69, 222, 196, 0) 0%,
+            #62e0ff 25%,
+            #52aeff 37.51%,
+            #fd5c79 62.83%,
+            #6d45ce 92.91%);
+    position: absolute;
+    top: 0;
+    border-radius: 4px;
+}
+
+.expText {
+    display: flex;
+    gap: 1.25rem;
+    position: relative;
+    z-index: 20;
+    flex: 1;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .expText {
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .expText {
+        gap: 2rem;
+        flex-direction: row;
+    }
+}
+
+.timeline-logo {
+    flex: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(14, 14, 16, 0.9);
+    width: 40px;
+    height: 40px;
+    color: #d9ecff;
+}
+
+@media (min-width: 768px) {
+    .timeline-logo {
+        width: 50px;
+        height: 50px;
+        transform: translateY(-5px);
+    }
+}
+
+.timeline-logo i {
+    width: 20px;
+    height: 20px;
+}
+
+@media (min-width: 768px) {
+    .timeline-logo i {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.expText-content {
+    color: #d9ecff;
+}
+
+.expText-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .expText-title {
+        font-size: 1.5rem;
+    }
+}
+
+.expText-desc {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: #d9ecff;
+    list-style-type: none;
+    margin-left: 0;
+}
+
+.expText-desc li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+
+/* ------------------------------------------- */
 .service-item {
     display: flex;
     align-items: flex-start;
@@ -163,7 +424,7 @@
 
 .service-icon {
     color: var(--primary);
-    width: 28px;
+    width: 14px;
     height: 28px;
     flex-shrink: 0;
     margin-top: 2px;

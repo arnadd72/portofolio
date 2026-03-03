@@ -469,4 +469,84 @@ document.addEventListener("DOMContentLoaded", () => {
             detectRetina: true,
         });
     }
+
+    // --- 12. GOOEY BUTTON EFFECT ---
+    const gooeyBtns = document.querySelectorAll('.gooey-btn'); 
+    
+    gooeyBtns.forEach(btn => {
+        // Tambahkan div gooey-bg ke dalam tombol
+        if (!btn.querySelector('.gooey-bg')) {
+            const bg = document.createElement('div');
+            bg.className = 'gooey-bg';
+            btn.appendChild(bg);
+        }
+
+        // Lacak kursor mouse
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            btn.style.setProperty('--x', x);
+            btn.style.setProperty('--y', y);
+        });
+
+        // Kembalikan ke tengah saat mouse pergi
+        btn.addEventListener('mouseleave', () => {
+            btn.style.setProperty('--x', 50);
+            btn.style.setProperty('--y', 50);
+        });
+    });
+
+    // --- 13. TIMELINE GSAP ANIMATION ---
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate each timeline card coming in from left
+        gsap.utils.toArray(".timeline-card").forEach((card) => {
+            gsap.from(card, {
+                xPercent: -50,
+                opacity: 0,
+                transformOrigin: "left left",
+                duration: 1,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                },
+            });
+        });
+
+        // Animate the timeline mask as user scrolls
+        gsap.utils.toArray(".timeline").forEach((timeline) => {
+            gsap.to(timeline, {
+                transformOrigin: "bottom bottom",
+                ease: "power1.inOut",
+                scrollTrigger: {
+                    trigger: timeline.closest('.timeline-wrapper'),
+                    start: "top center",
+                    end: "70% center",
+                    onUpdate: (self) => {
+                        gsap.to(timeline, {
+                            scaleY: 1 - self.progress,
+                        });
+                    },
+                },
+            });
+        });
+
+        // Animate expText elements
+        gsap.utils.toArray(".expText").forEach((text) => {
+            gsap.from(text, {
+                opacity: 0,
+                x: 20, /* Slight translation instead of xPercent: 0 for smoother effect */
+                duration: 1,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: text,
+                    start: "top 60%",
+                },
+            });
+        });
+    }
 });

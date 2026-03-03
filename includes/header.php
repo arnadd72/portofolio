@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnanda Setya | Premium Portfolio</title>
+    <title>Arnanda Setya Nosa Putra | Premium Portfolio</title>
 
     <link rel="stylesheet" href="assets/css/main.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/animations.css?v=<?= time(); ?>">
