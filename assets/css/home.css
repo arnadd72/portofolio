@@ -1,11 +1,9 @@
 .hero-section {
     min-height: 90vh;
-    /* Reduced from 100vh to remove excessive vertical space */
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 60px;
-    /* Reduced from 80px */
     position: relative;
     width: 100%;
 }

@@ -38,19 +38,43 @@
     overflow: hidden;
     border-radius: 20px;
     background: rgba(11, 17, 32, 0.6);
-    backdrop-filter: blur(10px);
-    transition: opacity 1.5s cubic-bezier(0.33, 1, 0.68, 1), transform 1.5s cubic-bezier(0.33, 1, 0.68, 1), box-shadow 0.5s ease, border-color 0.5s ease, background 0.5s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Fallback */
+    transition: opacity 1.5s cubic-bezier(0.33, 1, 0.68, 1), transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease, background 0.5s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transform-style: preserve-3d;
     position: relative;
     top: 0;
+    color: #ffffff;
+}
+
+/* Apply 4 solid vibrant colors and default tilt */
+.project-card:nth-child(4n+1) {
+    background: var(--card-blue);
+    transform: rotate(-3deg);
+}
+
+.project-card:nth-child(4n+2) {
+    background: var(--card-pink);
+    transform: rotate(2deg);
+}
+
+.project-card:nth-child(4n+3) {
+    background: var(--card-green);
+    transform: rotate(-2deg);
+}
+
+.project-card:nth-child(4n+4) {
+    background: var(--card-orange);
+    transform: rotate(3deg);
 }
 
 .project-card:hover {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+    /* Lift up and rotate a bit more for 3D effect */
     transform: translateY(-15px) scale(1.03) perspective(1000px) rotateX(2deg) rotateY(-2deg);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(20, 184, 166, 0.15);
-    border-color: rgba(20, 184, 166, 0.4);
+    /* Softer, more elegant shadow for dark themes */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
     z-index: 10;
 }
 
@@ -97,7 +121,7 @@
 }
 
 .project-info h3 {
-    color: var(--text-main);
+    color: #ffffff;
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 5px;
@@ -105,7 +129,7 @@
 }
 
 .project-card:hover .project-info h3 {
-    color: var(--primary);
+    color: #ffffff;
 }
 
 .tech-tags {
@@ -117,9 +141,9 @@
 }
 
 .tag {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-muted);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 4px 12px;
     border-radius: 6px;
     font-size: 0.7rem;
@@ -128,15 +152,15 @@
 }
 
 .project-card:hover .tag {
-    background: rgba(20, 184, 166, 0.1);
-    color: var(--primary);
-    border-color: rgba(20, 184, 166, 0.3);
+    background: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .link-btn {
     display: inline-flex;
     align-items: center;
-    color: var(--text-main);
+    color: #ffffff;
     text-decoration: none;
     font-size: 0.9rem;
     margin-right: 15px;
@@ -144,7 +168,7 @@
 }
 
 .link-btn:hover {
-    color: var(--primary);
+    color: #ffffff;
     transform: translateX(3px);
 }
 

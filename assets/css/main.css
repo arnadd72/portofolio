@@ -1,21 +1,29 @@
 /* assets/css/main.css */
 :root {
-    --primary: #8b5cf6;
-    /* Vibrant Neon Purple */
-    --primary-hover: #7c3aed;
-    --secondary: #06b6d4;
-    /* Bright Cyan */
-    --bg-main: #0f172a;
-    /* Slate 900 - Lighter than pitch black/generic dark */
-    --bg-surface: rgba(30, 41, 59, 0.75);
-    /* Frosted Slate glass */
-    --bg-surface-hover: rgba(30, 41, 59, 0.95);
-    --text-main: #f8fafc;
+    --primary: #1C84FF;
+    --primary-hover: #156ad6;
+    --secondary: #FC2BFA;
+    /* Rich, professional dark background (lighter slate/navy mix) */
+    --bg-main: #141b2d;
+    /* Slate 800-like base */
+    --bg-main-grad-1: #1e293b;
+    /* Slightly lighter gradient */
+    --bg-main-grad-2: #0f172a;
+    /* Darker edge */
+    --bg-surface: rgba(30, 41, 59, 0.4);
+    /* Glassmorphism on dark */
+    --bg-surface-hover: rgba(30, 41, 59, 0.6);
+    --text-main: #ffffff;
     --text-muted: #cbd5e1;
-    --border-glass: rgba(139, 92, 246, 0.2);
-    /* Purple tinted glass border */
-    --border-glow: rgba(139, 92, 246, 0.6);
-    --glow-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --border-glow: rgba(255, 255, 255, 0.2);
+    --glow-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+
+    /* Card Colors */
+    --card-blue: #1C84FF;
+    --card-pink: #FC2BFA;
+    --card-green: #3CCF91;
+    --card-orange: #F26A4A;
 }
 
 [data-theme="light"] {
@@ -108,7 +116,10 @@ body {
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: var(--bg-main);
+    /* Professional dark mesh gradient */
+    background: radial-gradient(circle at 15% 50%, var(--bg-main-grad-1), transparent 50%),
+        radial-gradient(circle at 85% 30%, var(--bg-main-grad-2), transparent 50%);
+    background-color: var(--bg-main);
     overflow: hidden;
 }
 
@@ -126,16 +137,22 @@ body {
 }
 
 .animated-bg::before {
-    background: var(--primary);
+    background: var(--card-blue);
+    /* Blue accent */
     top: -100px;
     left: -200px;
+    opacity: 0.3;
+    /* Increased opacity for visible gradient */
 }
 
 .animated-bg::after {
-    background: var(--secondary);
+    background: var(--card-pink);
+    /* Pink accent */
     bottom: -100px;
     right: -200px;
     animation-delay: -10s;
+    opacity: 0.25;
+    /* Increased opacity for visible gradient */
 }
 
 @keyframes floatOrbs {
@@ -296,6 +313,31 @@ body {
     border: 1px solid var(--border-glass);
 }
 
+/* Apply 4 vibrant colors to tech flip cards */
+.tech-flip-card:nth-child(4n+1) .tech-flip-front,
+.tech-flip-card:nth-child(4n+1) .tech-flip-back {
+    background: var(--card-blue);
+    border: none;
+}
+
+.tech-flip-card:nth-child(4n+2) .tech-flip-front,
+.tech-flip-card:nth-child(4n+2) .tech-flip-back {
+    background: var(--card-pink);
+    border: none;
+}
+
+.tech-flip-card:nth-child(4n+3) .tech-flip-front,
+.tech-flip-card:nth-child(4n+3) .tech-flip-back {
+    background: var(--card-green);
+    border: none;
+}
+
+.tech-flip-card:nth-child(4n+4) .tech-flip-front,
+.tech-flip-card:nth-child(4n+4) .tech-flip-back {
+    background: var(--card-orange);
+    border: none;
+}
+
 .tech-flip-front img {
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.15));
     transition: 0.4s cubic-bezier(0.4, 0.2, 0.2, 1.2);
@@ -316,8 +358,8 @@ body {
 .tech-name {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--text-main);
-    text-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+    color: #ffffff;
+    text-shadow: none;
 }
 
 /* Fallback for missing SVGs */
@@ -343,7 +385,7 @@ body {
 
 .btn-primary {
     background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-    color: #fff;
+    color: #0f172a;
 }
 
 .btn-outline {
