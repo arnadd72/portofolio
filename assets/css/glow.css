@@ -1,0 +1,56 @@
+/* assets/css/glow.css */
+
+.glow-card {
+    position: relative;
+    overflow: hidden;
+    /* Ensuring the card's inner content stays above the glow */
+}
+
+/* The glow element that tracks the cursor angle */
+.glow-card .glow {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    /* 
+      Conic gradient centered around the calculated angle.
+      By sweeping 0deg -> 360deg with the center point around `0deg`,
+      we align the "brightest" spot directly exactly towards the cursor.
+    */
+    background: conic-gradient(from var(--start, 0deg),
+            rgba(255, 255, 255, 0) 0deg,
+            #c084fc 120deg,
+            #ffffff 180deg,
+            #c084fc 240deg,
+            rgba(255, 255, 255, 0) 360deg);
+
+    /* Apply a mask so the gradient is ONLY visible on the border edge */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 2px;
+    /* Make the glowing border slightly thicker to look more intense */
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Ensure content stays above the background glow effect */
+.glow-card>*:not(.glow) {
+    position: relative;
+    z-index: 10;
+}
+
+/* Show glow on hover */
+.glow-card:hover .glow {
+    opacity: 1;
+    /* Fully opaque on hover */
+}

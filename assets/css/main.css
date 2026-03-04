@@ -1,29 +1,33 @@
 /* assets/css/main.css */
 :root {
-    --primary: #1C84FF;
-    --primary-hover: #156ad6;
-    --secondary: #FC2BFA;
-    /* Rich, professional dark background (lighter slate/navy mix) */
-    --bg-main: #141b2d;
-    /* Slate 800-like base */
-    --bg-main-grad-1: #1e293b;
-    /* Slightly lighter gradient */
-    --bg-main-grad-2: #0f172a;
-    /* Darker edge */
-    --bg-surface: rgba(30, 41, 59, 0.4);
-    /* Glassmorphism on dark */
-    --bg-surface-hover: rgba(30, 41, 59, 0.6);
+    --primary: #c084fc;
+    /* Purple highlight matching the photo */
+    --primary-hover: #a855f7;
+    --secondary: #10b981;
+    /* Green highlight if needed */
+    /* Extreme dark professional background */
+    --bg-main: #060608;
+    /* Near pitch black */
+    --bg-main-grad-1: #0a0a0f;
+    --bg-main-grad-2: #020202;
+    --bg-surface: rgba(255, 255, 255, 0.02);
+    /* Extremely subtle glass */
+    --bg-surface-hover: rgba(255, 255, 255, 0.05);
     --text-main: #ffffff;
-    --text-muted: #cbd5e1;
-    --border-glass: rgba(255, 255, 255, 0.1);
-    --border-glow: rgba(255, 255, 255, 0.2);
-    --glow-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    /* Crisp white */
+    --text-muted: #a1a1aa;
+    /* Zinc 400 for neutral grayish text */
+    --border-glass: rgba(255, 255, 255, 0.05);
+    /* Barely visible border */
+    --border-glow: rgba(192, 132, 252, 0.15);
+    /* Purple glow */
+    --glow-shadow: 0 0 25px rgba(192, 132, 252, 0.05);
 
-    /* Card Colors */
-    --card-blue: #1C84FF;
-    --card-pink: #FC2BFA;
-    --card-green: #3CCF91;
-    --card-orange: #F26A4A;
+    /* Fixed Card Colors - Dark theme cards shouldn't have bright fallback backgrounds anymore */
+    --card-blue: rgba(255, 255, 255, 0.03);
+    --card-pink: rgba(255, 255, 255, 0.03);
+    --card-green: rgba(255, 255, 255, 0.03);
+    --card-orange: rgba(255, 255, 255, 0.03);
 }
 
 [data-theme="light"] {
@@ -44,7 +48,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 html {
@@ -56,6 +60,16 @@ body {
     color: var(--text-main);
     line-height: 1.7;
     overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 800;
+    letter-spacing: -0.03em;
 }
 
 ::-webkit-scrollbar {
@@ -91,10 +105,21 @@ body {
 }
 
 .section-title span {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(90deg, #ffffff 0%, #c4b5fd 50%, #a855f7 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Gradient text utility class */
+.gradient-text {
+    background: linear-gradient(90deg, #ffffff 10%, #d8b4fe 60%, #a855f7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
 }
 
 .scroll-progress-container {
@@ -116,57 +141,39 @@ body {
     position: fixed;
     inset: 0;
     z-index: -1;
-    /* Professional dark mesh gradient */
-    background: radial-gradient(circle at 15% 50%, var(--bg-main-grad-1), transparent 50%),
-        radial-gradient(circle at 85% 30%, var(--bg-main-grad-2), transparent 50%);
-    background-color: var(--bg-main);
+    background-color: transparent;
     overflow: hidden;
+    pointer-events: none;
 }
 
-/* Floating Orbs */
+/* Static, large, extremely subtle glows reproducing the vignette/glow in the photos */
 .animated-bg::before,
 .animated-bg::after {
     content: '';
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 60vw;
+    height: 60vh;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.15;
-    animation: floatOrbs 20s infinite ease-in-out alternate;
+    filter: blur(120px);
+    opacity: 0.12;
+    /* Very subtle glow */
+    pointer-events: none;
+    z-index: -1;
 }
 
+/* Purple glow from top left */
 .animated-bg::before {
-    background: var(--card-blue);
-    /* Blue accent */
-    top: -100px;
-    left: -200px;
-    opacity: 0.3;
-    /* Increased opacity for visible gradient */
+    background: #c084fc;
+    top: -20vh;
+    left: -20vw;
 }
 
+/* Teal/Greenish glow from bottom right */
 .animated-bg::after {
-    background: var(--card-pink);
-    /* Pink accent */
-    bottom: -100px;
-    right: -200px;
-    animation-delay: -10s;
-    opacity: 0.25;
-    /* Increased opacity for visible gradient */
-}
-
-@keyframes floatOrbs {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    50% {
-        transform: translate(20%, 30%) scale(1.1);
-    }
-
-    100% {
-        transform: translate(-10%, 20%) scale(0.9);
-    }
+    background: #10b981;
+    bottom: -20vh;
+    right: -20vw;
+    opacity: 0.08;
 }
 
 .container {
@@ -200,13 +207,14 @@ body {
 
 .glass {
     background: var(--bg-surface);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border: 1px solid var(--border-glass);
-    border-radius: 16px;
+    border-radius: 20px;
     transition: var(--transition-smooth);
     position: relative;
     z-index: 20;
-    /* Keep content above particles */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .glass-tilt {
@@ -215,11 +223,12 @@ body {
 }
 
 .highlight {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff;
+    /* In the reference, "3+" and "15+" are white, while the plus sign might be colored. 
+       Let's stick to sharp white for the main highlight numbers */
 }
+
+/* Removed duplicate .gradient-text since it is already defined above */
 
 .typing-text::after {
     content: '|';
@@ -237,6 +246,26 @@ body {
     display: grid;
     gap: 20px;
     padding: 20px 0;
+}
+
+/* Floating Animation for Tech Stack Icons */
+@keyframes floatIcon {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.tech-icon-wrapper img {
+    /* Always floating slowly without requiring hover */
+    animation: floatIcon 4s ease-in-out infinite;
 }
 
 /* Enforce 5 columns on desktop */
@@ -311,31 +340,15 @@ body {
 .tech-flip-front {
     background: var(--bg-surface);
     border: 1px solid var(--border-glass);
+    border-radius: 16px;
 }
 
-/* Apply 4 vibrant colors to tech flip cards */
-.tech-flip-card:nth-child(4n+1) .tech-flip-front,
-.tech-flip-card:nth-child(4n+1) .tech-flip-back {
-    background: var(--card-blue);
-    border: none;
-}
-
-.tech-flip-card:nth-child(4n+2) .tech-flip-front,
-.tech-flip-card:nth-child(4n+2) .tech-flip-back {
-    background: var(--card-pink);
-    border: none;
-}
-
-.tech-flip-card:nth-child(4n+3) .tech-flip-front,
-.tech-flip-card:nth-child(4n+3) .tech-flip-back {
-    background: var(--card-green);
-    border: none;
-}
-
-.tech-flip-card:nth-child(4n+4) .tech-flip-front,
-.tech-flip-card:nth-child(4n+4) .tech-flip-back {
-    background: var(--card-orange);
-    border: none;
+/* Remove bright colors and use subtle dark glass for tech cards */
+.tech-flip-card .tech-flip-front,
+.tech-flip-card .tech-flip-back {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
 }
 
 .tech-flip-front img {
@@ -350,8 +363,9 @@ body {
 }
 
 .tech-flip-back {
-    background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(52, 211, 153, 0.2));
-    border: 1px solid var(--primary);
+    background: rgba(192, 132, 252, 0.05);
+    /* Subtle purple wash */
+    border: 1px solid rgba(192, 132, 252, 0.2);
     transform: rotateY(180deg);
 }
 
@@ -375,22 +389,37 @@ body {
     display: inline-flex;
     align-items: center;
     padding: 12px 28px;
-    border-radius: 10px;
+    border-radius: 50px;
+    /* Fully rounded pill buttons */
     font-weight: 600;
     text-decoration: none;
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 0.95rem;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-    color: #0f172a;
+    background: #ffffff;
+    /* Solid white like in the photo */
+    color: #000000;
+}
+
+.btn-primary:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
 }
 
 .btn-outline {
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
 }
 
 .btn-icon {

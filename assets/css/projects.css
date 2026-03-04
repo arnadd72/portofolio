@@ -37,44 +37,28 @@
     padding: 0;
     overflow: hidden;
     border-radius: 20px;
-    background: rgba(11, 17, 32, 0.6);
-    /* Fallback */
+    background: rgba(255, 255, 255, 0.02);
+    /* Extremely subtle dark glass */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition: opacity 1.5s cubic-bezier(0.33, 1, 0.68, 1), transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease, background 0.5s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Barely visible border */
     transform-style: preserve-3d;
     position: relative;
     top: 0;
     color: #ffffff;
 }
 
-/* Apply 4 solid vibrant colors and default tilt */
-.project-card:nth-child(4n+1) {
-    background: var(--card-blue);
-    transform: rotate(-3deg);
-}
-
-.project-card:nth-child(4n+2) {
-    background: var(--card-pink);
-    transform: rotate(2deg);
-}
-
-.project-card:nth-child(4n+3) {
-    background: var(--card-green);
-    transform: rotate(-2deg);
-}
-
-.project-card:nth-child(4n+4) {
-    background: var(--card-orange);
-    transform: rotate(3deg);
-}
-
 .project-card:hover {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
-    /* Lift up and rotate a bit more for 3D effect */
-    transform: translateY(-15px) scale(1.03) perspective(1000px) rotateX(2deg) rotateY(-2deg);
-    /* Softer, more elegant shadow for dark themes */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
+    /* Lift up slightly for 3D effect */
+    transform: translateY(-8px) scale(1.02) perspective(1000px) rotateX(2deg) rotateY(-2deg);
+    /* Soft glowing shadow, relying on purple highlight */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(192, 132, 252, 0.15);
+    border-color: rgba(192, 132, 252, 0.3);
+    /* Purple tinted border on hover */
+    background: rgba(255, 255, 255, 0.04);
     z-index: 10;
 }
 
@@ -129,7 +113,11 @@
 }
 
 .project-card:hover .project-info h3 {
-    color: #ffffff;
+    background: linear-gradient(135deg, #e879f9, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .tech-tags {
@@ -141,9 +129,9 @@
 }
 
 .tag {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 4px 12px;
     border-radius: 6px;
     font-size: 0.7rem;
@@ -152,9 +140,10 @@
 }
 
 .project-card:hover .tag {
-    background: rgba(255, 255, 255, 0.4);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(192, 132, 252, 0.1);
+    /* Subtle purple */
+    color: #e879f9;
+    border-color: rgba(192, 132, 252, 0.3);
 }
 
 .link-btn {

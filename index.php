@@ -9,7 +9,7 @@
     
     <!-- CSS Dependencies from index.html (Terminal) -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- CSS Dependencies from header.php (Portfolio) -->
@@ -19,8 +19,9 @@
     <link rel="stylesheet" href="assets/css/projects.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/welcome.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
     <link rel="stylesheet" href="assets/css/space.css"> <!-- Custom Space Art -->
-    <link rel="stylesheet" href="assets/css/gooey-buttons.css"> <!-- Gooey Button Animation -->
+    <link rel="stylesheet" href="assets/css/glow.css"> <!-- 3D Mouse Tracking Glow -->
     
     <!-- SweetAlert2 (Portfolio) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -33,10 +34,10 @@
 <body class="no-scroll">
 
     <!-- Global Background Color Fallback (behind particles) -->
-    <div style="position: fixed; inset: 0; background-color: var(--bg-main); z-index: -999;"></div>
+    <div style="position: fixed; inset: 0; background-color: #090e17; z-index: -999;"></div>
 
     <!-- PURE METEOR SHOWER BACKGROUND CONTAINER -->
-    <div class="galaxy-bg" style="position: fixed; inset: 0; z-index: -3; background: var(--bg-main);"></div>
+    <div class="galaxy-bg" style="position: fixed; inset: 0; z-index: -3;"></div>
 
     <!-- INTERACTIVE SPACE BACKGROUND (tsParticles) -->
     <div id="tsparticles" style="position: fixed; inset: 0; z-index: 0; pointer-events: none;"></div>
@@ -46,7 +47,7 @@
     <!-- Navbar from header.php -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">ASN<span class="text-primary">.P</span></a>
+            <a href="#" class="logo">ASNP<span class="text-primary"></span></a>
             <div class="nav-links">
                 <a href="#hero" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">Tentang</a>
@@ -97,46 +98,11 @@
 
     <!-- Core Scripts (loads AFTER all libraries) -->
     <script src="assets/js/main.js"></script>
-
-    <!-- SVG Goo Filter for Gooey Buttons -->
-    <svg width="0" height="0" style="position: absolute;">
-        <filter id="goo" x="-50%" y="-50%" width="200%" height="200%">
-            <feComponentTransfer>
-                <feFuncA type="discrete" tableValues="0 1"/>
-            </feComponentTransfer>
-            <feGaussianBlur stdDeviation="5"/>
-            <feComponentTransfer>
-                <feFuncA type="table" tableValues="-5 11"/>
-            </feComponentTransfer>
-        </filter>
-    </svg>
+    <script src="assets/js/glow.js"></script>
 
     <script>
         lucide.createIcons();
         AOS.init({ duration: 800, once: false, mirror: true });
-
-        // Gooey buttons: inject background layer + cursor tracking
-        document.querySelectorAll('.gooey-btn').forEach(btn => {
-            // Inject .gooey-bg span (receives SVG filter, keeps text crisp)
-            if (!btn.querySelector('.gooey-bg')) {
-                const bg = document.createElement('span');
-                bg.className = 'gooey-bg';
-                bg.setAttribute('aria-hidden', 'true');
-                btn.insertBefore(bg, btn.firstChild);
-            }
-            // Cursor tracking — blob follows mouse position
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-                btn.style.setProperty('--x', x);
-                btn.style.setProperty('--y', y);
-            });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.setProperty('--x', 50);
-                btn.style.setProperty('--y', 50);
-            });
-        });
     </script>
 </body>
 </html>

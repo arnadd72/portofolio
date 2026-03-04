@@ -1,11 +1,30 @@
 // assets/js/main.js
 
+// --- 0. FORCE SCROLL TO TOP ON REFRESH ---
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Clear hash if present to prevent browser jumping to sections
+if (window.location.hash) {
+    window.history.replaceState('', document.title, window.location.pathname + window.location.search);
+}
+
+// Immediately scroll to top
+window.scrollTo(0, 0);
+
+// Force scroll to top when everything (including images/CSS) finishes loading
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }, 10);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // --- 0. FORCE SCROLL TO TOP ON REFRESH ---
-    if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-    }
+    // Scroll to top during early DOM parsing
+    window.scrollTo(0, 0);
     // --- 1. ASTRONAUT 3D WELCOME SCREEN SUTRADARA ---
     const welcomeScreen = document.getElementById('welcome-screen');
     const welcomeProgress = document.getElementById('welcome-progress');
@@ -26,11 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
             if (progress >= 100) {
                 progress = 100;
                 clearInterval(loadingInterval);
-                document.getElementById('welcome-status').textContent = "Launch successful.";
+                document.getElementById('welcome-status')
+                    .textContent = "Launch successful.";
                 
                 // Menunggu sejenak setelah 100% lalu hilangkan welcome screen
                 setTimeout(() => {
-                    welcomeScreen.classList.add('exit'); // Mengaktifkan CSS transition fade + blur
+                    // Mengaktifkan CSS transition fade + blur
+                    welcomeScreen.classList.add('exit'); 
                     
                     setTimeout(() => {
                         welcomeScreen.style.display = 'none';
@@ -84,10 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
             tl.call(initTypingEffect);
         } else {
             // Fallback: Show elements instantly if GSAP fails to load
-            document.querySelectorAll('.gsap-reveal, .gsap-reveal-3d').forEach(el => {
-                el.style.opacity = 1;
-                el.style.transform = 'none';
-            });
+            document.querySelectorAll('.gsap-reveal, .gsap-reveal-3d')
+                .forEach(el => {
+                    el.style.opacity = 1;
+                    el.style.transform = 'none';
+                });
             initTypingEffect();
         }
 
@@ -104,10 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const currentRole = roles[roleIndex];
                 
                 if (isDeleting) {
-                    typingText.textContent = currentRole.substring(0, charIndex - 1);
+                    typingText.textContent = 
+                        currentRole.substring(0, charIndex - 1);
                     charIndex--;
                 } else {
-                    typingText.textContent = currentRole.substring(0, charIndex + 1);
+                    typingText.textContent = 
+                        currentRole.substring(0, charIndex + 1);
                     charIndex++;
                 }
 
@@ -133,9 +157,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 2.5 ROTATING QUOTES ---
     const quotes = [
-        { text: '"Satu-satunya cara untuk melakukan pekerjaan hebat adalah dengan mencintai apa yang Anda lakukan."', author: "Steve Jobs" },
-        { text: '"Kode yang baik adalah dokumentasi terbaiknya sendiri. Seiring Anda mulai menambahkan komentar, tanyakan pada diri Anda: Bagaimana saya bisa membuat kode ini lebih mudah dipahami?"', author: "Steve McConnell" },
-        { text: '"Desain bukan sekadar apa yang terlihat dan terasa. Desain adalah bagaimana ia berfungsi."', author: "Steve Jobs" }
+        { 
+            text: '"Satu-satunya cara untuk melakukan pekerjaan hebat adalah dengan mencintai apa yang Anda lakukan."', 
+            author: "Steve Jobs" 
+        },
+        { 
+            text: '"Kode yang baik adalah dokumentasi terbaiknya sendiri. Seiring Anda mulai menambahkan komentar, tanyakan pada diri Anda: Bagaimana saya bisa membuat kode ini lebih mudah dipahami?"', 
+            author: "Steve McConnell" 
+        },
+        { 
+            text: '"Desain bukan sekadar apa yang terlihat dan terasa. Desain adalah bagaimana ia berfungsi."', 
+            author: "Steve Jobs" 
+        }
     ];
     let quoteIndex = 0;
     const quoteContainer = document.querySelector('.hero-quote-text');
@@ -160,7 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- 3. (CURSOR REMOVED - USING DEFAULT BROWSER CURSOR) ---
-
 
     // --- 4. MAGNETIC BUTTONS ---
     const magneticEls = document.querySelectorAll('.magnetic-el, .btn');
@@ -229,16 +261,23 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
             
-            profileCard.style.setProperty('--pointer-x', `${(leftX / bounds.width) * 100}%`);
-            profileCard.style.setProperty('--pointer-y', `${(topY / bounds.height) * 100}%`);
+            profileCard.style.setProperty('--pointer-x', 
+                `${(leftX / bounds.width) * 100}%`);
+            profileCard.style.setProperty('--pointer-y', 
+                `${(topY / bounds.height) * 100}%`);
             
-            profileCard.style.setProperty('--pointer-from-center', clamp(distance / (bounds.width / 2), 0, 1));
-            profileCard.style.setProperty('--pointer-from-left', clamp(leftX / bounds.width, 0, 1));
-            profileCard.style.setProperty('--pointer-from-top', clamp(topY / bounds.height, 0, 1));
+            profileCard.style.setProperty('--pointer-from-center', 
+                clamp(distance / (bounds.width / 2), 0, 1));
+            profileCard.style.setProperty('--pointer-from-left', 
+                clamp(leftX / bounds.width, 0, 1));
+            profileCard.style.setProperty('--pointer-from-top', 
+                clamp(topY / bounds.height, 0, 1));
             
             // Adjust sensitivity below. Lower multiple = less rotation.
-            profileCard.style.setProperty('--rotate-x', `${(center.y / 100) * -15}deg`);
-            profileCard.style.setProperty('--rotate-y', `${(center.x / 100) * 15}deg`);
+            profileCard.style.setProperty('--rotate-x', 
+                `${(center.y / 100) * -15}deg`);
+            profileCard.style.setProperty('--rotate-y', 
+                `${(center.x / 100) * 15}deg`);
         }
         
         const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
@@ -266,9 +305,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const heroContent = document.querySelector('.hero-text-content'); 
     
     window.addEventListener('scroll', () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const winScroll = 
+            document.body.scrollTop || document.documentElement.scrollTop;
+        const height = 
+            document.documentElement.scrollHeight - 
+            document.documentElement.clientHeight;
         const scrolled = (winScroll / height) * 100;
+        
         if(progressBar) progressBar.style.width = scrolled + "%";
 
         if(heroContent && window.scrollY < window.innerHeight) {
@@ -278,7 +321,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- 7. SCROLL REVEAL & SKILL BARS ---
-    const reveals = document.querySelectorAll('.reveal, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip, .project-card, .tech-card, .tech-flip-card');
+    const reveals = document.querySelectorAll(
+        '.reveal, .reveal-up, .reveal-down, .reveal-left, ' +
+        '.reveal-right, .reveal-scale, .reveal-flip, ' +
+        '.project-card, .tech-card, .tech-flip-card'
+    );
     const skillBars = document.querySelectorAll('.skill-progress');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -337,16 +384,40 @@ document.addEventListener("DOMContentLoaded", () => {
             btnSubmit.innerHTML = 'Sending...';
             btnSubmit.disabled = true;
             try {
-                const res = await fetch('api/contact.php', { method: 'POST', body: new FormData(form) });
+                const res = await fetch('api/contact.php', { 
+                    method: 'POST', 
+                    body: new FormData(form) 
+                });
                 const result = await res.json();
                 if (result.status === 'success') {
-                    Swal.fire({ title: 'Success!', text: result.message, icon: 'success', background: '#0b1120', color: '#f8fafc', confirmButtonColor: '#14b8a6' });
+                    Swal.fire({ 
+                        title: 'Success!', 
+                        text: result.message, 
+                        icon: 'success', 
+                        background: '#0b1120', 
+                        color: '#f8fafc', 
+                        confirmButtonColor: '#14b8a6' 
+                    });
                     form.reset();
                 } else {
-                    Swal.fire({ title: 'Oops...', text: result.message, icon: 'error', background: '#0b1120', color: '#f8fafc', confirmButtonColor: '#14b8a6' });
+                    Swal.fire({ 
+                        title: 'Oops...', 
+                        text: result.message, 
+                        icon: 'error', 
+                        background: '#0b1120', 
+                        color: '#f8fafc', 
+                        confirmButtonColor: '#14b8a6' 
+                    });
                 }
             } catch (err) {
-                Swal.fire({ title: 'Error!', text: 'Connection failed.', icon: 'error', background: '#0b1120', color: '#f8fafc', confirmButtonColor: '#14b8a6' });
+                Swal.fire({ 
+                    title: 'Error!', 
+                    text: 'Connection failed.', 
+                    icon: 'error', 
+                    background: '#0b1120', 
+                    color: '#f8fafc', 
+                    confirmButtonColor: '#14b8a6' 
+                });
             } finally {
                 btnSubmit.innerHTML = '<i data-lucide="send" class="icon-sm"></i> Send Message';
                 btnSubmit.disabled = false;
@@ -362,7 +433,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const html = document.documentElement;
     const navbar = document.querySelector('.navbar');
 
-    if (hamburger) hamburger.addEventListener('click', () => navLinks.classList.toggle('show'));
+    if (hamburger) hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
     
     // Enforce dark mode as absolute default if no preference is saved
     if (localStorage.getItem('theme') === 'light') {
@@ -383,7 +456,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
-            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            const next = html.getAttribute('data-theme') === 'dark' 
+                ? 'light' 
+                : 'dark';
             html.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
             updateThemeIcon();
@@ -539,7 +614,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.utils.toArray(".expText").forEach((text) => {
             gsap.from(text, {
                 opacity: 0,
-                x: 20, /* Slight translation instead of xPercent: 0 for smoother effect */
+                /* Slight translation instead of xPercent: 0 for smoother effect */
+                x: 20, 
                 duration: 1,
                 ease: "power2.inOut",
                 scrollTrigger: {
@@ -549,4 +625,70 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    // --- 15. CONTACT FORM AJAX EMAIL SENDER ---
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i data-lucide="loader-2" class="icon-sm spin"></i> Mengirim...';
+            submitBtn.disabled = true;
+
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            data._subject = `Pesan Baru dari Portfolio: ${data.subject}`;
+            data._captcha = false;
+            data._template = "basic";
+
+            fetch('https://formsubmit.co/ajax/nosaclp4@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success === 'true' || result.success === true) {
+                    Swal.fire({
+                        title: 'Terkirim!',
+                        text: 'Pesan Anda berhasil diteruskan ke Email saya.',
+                        icon: 'success',
+                        background: '#0e0e10',
+                        color: '#fff',
+                        confirmButtonColor: '#c084fc'
+                    });
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.message || 'Terjadi kesalahan sistem.');
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Gagal Mengirim',
+                    text: 'Pastikan koneksi internet Anda stabil. (' + error.message + ')',
+                    icon: 'error',
+                    background: '#0e0e10',
+                    color: '#fff',
+                    confirmButtonColor: '#c084fc'
+                });
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+        });
+    }
+
 });

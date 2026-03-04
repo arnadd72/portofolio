@@ -1,4 +1,5 @@
 /* assets/css/welcome.css */
+
 body.no-scroll {
     overflow: hidden;
 }
@@ -6,243 +7,330 @@ body.no-scroll {
 .welcome-container {
     position: fixed;
     inset: 0;
-    background: #0f172a;
-    /* Solid dark background to hide all content behind */
+    background: #090e17;
+    /* Lebih gelap agar neon menonjol */
     z-index: 999999;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.8s ease, filter 0.8s ease;
+    transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s ease;
 }
 
 .welcome-container.exit {
     opacity: 0;
-    filter: blur(10px);
+    filter: blur(20px);
+    transform: scale(1.1);
     pointer-events: none;
 }
 
-/* Subtle glowing orbs in the background */
+/* Latar Belakang Cahaya Neon */
 .welcome-bg-glow {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.15;
-    animation: pulseGlow 4s infinite alternate;
+    filter: blur(120px);
+    opacity: 0.25;
+    animation: pulseGlow 4s infinite alternate ease-in-out;
 }
 
 .glow-1 {
     width: 600px;
     height: 600px;
-    background: #6366f1;
-    top: -100px;
+    background: #bc13fe;
+    /* Neon Purple */
+    top: -150px;
     left: -100px;
 }
 
 .glow-2 {
     width: 500px;
     height: 500px;
-    background: #14b8a6;
+    background: #00ffa3;
+    /* Neon Green */
     bottom: -100px;
     right: -100px;
     animation-delay: 2s;
 }
 
-/* Removed static CSS stars so tsParticles can be seen clearly */
-
-/* Premium Glassmorphism Card */
+/* Base Card Layout */
 .welcome-card {
     position: relative;
     z-index: 10;
     width: 90%;
-    max-width: 800px;
-    height: 500px;
-    background: rgba(17, 24, 39, 0.4);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 950px;
+    height: 520px;
+    background: rgba(10, 15, 26, 0.65);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(188, 19, 254, 0.15);
+    /* Border ungu transparan */
     border-radius: 24px;
     display: flex;
+    flex-direction: row;
     overflow: hidden;
     box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.5),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-    transform: scale(0.95);
+        0 30px 60px -15px rgba(0, 0, 0, 0.8),
+        inset 0 0 20px rgba(188, 19, 254, 0.05);
     opacity: 0;
-    animation: cardEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform: translateY(50px) scale(0.95);
+    animation: cardEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes cardEntrance {
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+/* Typography Consistency (Menggunakan font dari index.php) */
+.font-tech {
+    font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Add a subtle internal shine to the card */
-.welcome-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
-    pointer-events: none;
+.font-code {
+    font-family: 'Fira Code', monospace;
 }
 
-/* 3D Wrapper takes up the right half (or background on mobile) */
-.welcome-3d-wrapper {
-    flex: 1;
-    position: relative;
-    height: 100%;
-    min-width: 50%;
-}
-
-/* Content Area */
 .welcome-card-content {
     flex: 1;
-    padding: 60px 40px;
+    padding: 60px 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
     z-index: 2;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 .welcome-greeting {
-    font-family: 'Fira Code', monospace;
-    color: var(--primary);
-    font-size: 0.9rem;
-    text-transform: uppercase;
+    color: #00ffa3;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .welcome-heading {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2.5rem, 4.5vw, 3.8rem);
     font-weight: 800;
-    line-height: 1.2;
-    color: #f8fafc;
-    margin-bottom: auto;
-    /* Push loading bar to bottom */
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 20px;
 }
 
-.welcome-heading span {
-    background: linear-gradient(to right, #6366f1, #14b8a6);
+/* Teks Gradasi Neon Purple & Green dengan Shadow */
+.text-gradient-neon {
+    background: linear-gradient(135deg, #bc13fe 10%, #00ffa3 90%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
-/* Loading Bar Area */
+/* Efek Glow Berdetak pada Teks */
+.neon-pulse {
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+.welcome-subtext {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    font-weight: 400;
+}
+
+.highlight-neon {
+    color: #ffffff;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Loading Bar & Text */
 .welcome-loading-area {
-    margin-top: 40px;
+    margin-top: auto;
 }
 
 .loading-bar-container {
     width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .loading-bar-progress {
     width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #6366f1, #14b8a6);
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+    background: linear-gradient(90deg, #bc13fe, #00ffa3);
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.6);
     transition: width 0.1s linear;
 }
 
 .loading-text {
     display: flex;
     justify-content: space-between;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: 0.85rem;
+    color: #64748b;
+    letter-spacing: 0.5px;
 }
 
-/* Entrance Animations */
-.anim-fade-up {
+#welcome-percent {
+    color: #00ffa3;
+    font-weight: 700;
+}
+
+/* --- ANIMASI OBJEK 3D --- */
+.welcome-3d-wrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, rgba(188, 19, 254, 0.05) 0%, transparent 70%);
+}
+
+.css-abstract-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.abstract-svg {
+    width: 320px;
+    height: auto;
+    filter: drop-shadow(0 0 40px rgba(188, 19, 254, 0.4));
+}
+
+.ring-1 {
+    transform-origin: center;
+    animation: rotateRing 15s linear infinite;
+}
+
+.ring-2 {
+    transform-origin: center;
+    animation: rotateRingRev 10s linear infinite;
+}
+
+.ring-3 {
+    transform-origin: center;
+    animation: rotateRing 25s linear infinite;
+}
+
+.crystal {
+    transform-origin: center;
+    animation: floatCrystal 3s ease-in-out infinite alternate;
+}
+
+/* --- KEYFRAMES ANIMASI BARU (Lebih Memukau) --- */
+@keyframes cardEntrance {
+    0% {
+        transform: translateY(60px) scale(0.9);
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+/* Animasi Teks: Blur menjadi Tajam (Sangat Premium) */
+.anim-blur-reveal {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    filter: blur(8px);
+    animation: blurReveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-.delay-1 {
-    animation-delay: 0.3s;
-}
-
-.delay-2 {
-    animation-delay: 0.6s;
-}
-
-@keyframes fadeUp {
-    to {
+@keyframes blurReveal {
+    100% {
         opacity: 1;
         transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes textGlow {
+    0% {
+        filter: drop-shadow(0 0 5px rgba(188, 19, 254, 0.3));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 20px rgba(0, 255, 163, 0.6));
+    }
+}
+
+@keyframes rotateRing {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateRingRev {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes floatCrystal {
+    0% {
+        transform: translateY(0px) scale(1);
+    }
+
+    100% {
+        transform: translateY(-20px) scale(1.03);
     }
 }
 
 @keyframes pulseGlow {
     to {
-        transform: scale(1.2);
-        opacity: 0.25;
+        transform: scale(1.1);
+        opacity: 0.35;
     }
 }
 
-/* Responsive */
+/* Delays */
+.delay-1 {
+    animation-delay: 0.4s;
+}
+
+.delay-2 {
+    animation-delay: 0.7s;
+}
+
+.delay-3 {
+    animation-delay: 1.0s;
+}
+
+.delay-4 {
+    animation-delay: 1.3s;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .welcome-card {
-        flex-direction: column;
+        flex-direction: column-reverse;
         height: auto;
         max-height: 90vh;
-        width: 95%;
+        overflow-y: auto;
     }
 
     .welcome-3d-wrapper {
-        min-width: 100%;
-        height: 200px;
-        min-height: 200px;
+        min-height: 250px;
     }
 
-    .astro-svg {
-        width: 150px;
-    }
-
-    .welcome-card-content {
-        padding: 20px;
-    }
-
-    .welcome-heading {
-        font-size: clamp(1.5rem, 5vw, 2rem);
-    }
-}
-
-@media (max-width: 480px) {
-    .welcome-card {
-        width: 98%;
-        border-radius: 16px;
-    }
-
-    .welcome-3d-wrapper {
-        height: 160px;
-        min-height: 160px;
-    }
-
-    .astro-svg {
-        width: 120px;
+    .abstract-svg {
+        width: 220px;
     }
 
     .welcome-card-content {
-        padding: 15px;
+        padding: 30px 20px;
+        text-align: center;
     }
 
     .welcome-heading {
-        font-size: 1.3rem;
-    }
-
-    .welcome-greeting {
-        font-size: 0.75rem;
+        font-size: clamp(2rem, 6vw, 2.5rem);
     }
 }

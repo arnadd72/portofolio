@@ -1,0 +1,247 @@
+/* assets/css/contact.css */
+
+.contact-section {
+    position: relative;
+    z-index: 10;
+}
+
+/* Grid Layout */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+@media (min-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+    }
+}
+
+/* Left Column - Contact Info */
+.contact-info-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.contact-info-card {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    border-radius: 16px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(192, 132, 252, 0.4);
+}
+
+.contact-info-card .icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(192, 132, 252, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.contact-info-card h4 {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.contact-info-card p {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+/* Mini Social Grid */
+.social-mini-grid {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-mini-card {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-mini-card:hover {
+    color: var(--primary);
+    transform: translateY(-5px) scale(1.05);
+    border-color: rgba(192, 132, 252, 0.4);
+    box-shadow: 0 10px 20px -5px rgba(192, 132, 252, 0.15);
+}
+
+/* Intensive Form Styling - Floating Labels */
+.contact-form-col {
+    border-radius: 24px;
+    padding: 2.5rem !important;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.floating-group {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.floating-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.2rem 1rem 0.6rem 1rem;
+    font-size: 1rem;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+textarea.floating-input {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.floating-input:focus {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: transparent;
+    /* Glow line takes over */
+}
+
+/* Floating Label Animation */
+.floating-label {
+    position: absolute;
+    left: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+textarea~.floating-label {
+    top: 1.5rem;
+}
+
+/* When input is focused, or NOT empty (via placeholder-shown hack) */
+.floating-input:focus~.floating-label,
+.floating-input:not(:placeholder-shown)~.floating-label {
+    top: 0.6rem;
+    font-size: 0.75rem;
+    color: var(--primary);
+    transform: translateY(0);
+}
+
+textarea.floating-input:focus~.floating-label,
+textarea.floating-input:not(:placeholder-shown)~.floating-label {
+    top: 0.6rem;
+}
+
+/* Animated Glow Bottom Line */
+.input-glow-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    transition: width 0.4s ease;
+    border-radius: 0 0 12px 12px;
+}
+
+.floating-input:focus~.input-glow-line {
+    width: 100%;
+}
+
+/* Intensive Submit Button */
+.btn-intensive {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 14px;
+    background: var(--bg-surface);
+    border: 1px solid rgba(192, 132, 252, 0.3);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-intensive:hover {
+    background: rgba(192, 132, 252, 0.15);
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: var(--glow-shadow);
+}
+
+.btn-glow-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(192, 132, 252, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.btn-intensive:hover .btn-glow-aura {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-intensive .btn-text,
+.btn-intensive i {
+    position: relative;
+    z-index: 1;
+}
