@@ -84,9 +84,6 @@
     <footer class="footer">
         <div class="container text-center">
             <p>&copy; <?= date('Y') ?> Arnanda Setya Nosa Putra. All rights reserved.</p>
-            <p class="mt-1 text-sm text-muted" style="display:flex; align-items:center; justify-content:center;">
-                Dibuat dengan <i data-lucide="heart" style="width:16px; height:16px; margin:0 4px; color:var(--primary);"></i> di Indonesia
-            </p>
         </div>
     </footer>
 

@@ -123,6 +123,19 @@ body.welcome-done .hero-image-content {
     z-index: 10;
     margin: 0 auto;
     perspective: 1000px;
+    animation: floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 .pc-card {
@@ -159,6 +172,42 @@ body.welcome-done .hero-image-content {
     z-index: -1;
     transition: opacity 0.3s ease;
     pointer-events: none;
+}
+
+@property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+}
+
+/* Automated Glowing Border */
+.pc-card::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    /* Lebar garis glow */
+    border-radius: calc(var(--card-radius) + 2px);
+    background: conic-gradient(from var(--border-angle),
+            transparent 5%,
+            #c084fc,
+            #14b8a6,
+            transparent 15%);
+    z-index: 0;
+    pointer-events: none;
+    padding: 2px;
+    /* Sama dengan inset */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    border: 2px solid transparent;
+    animation: rotateCardBorder 4s linear infinite;
+}
+
+@keyframes rotateCardBorder {
+    to {
+        --border-angle: 1turn;
+    }
 }
 
 /* Inside container */
@@ -243,6 +292,51 @@ body.welcome-done .hero-image-content {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.2));
     transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Automatic Shine Effect over Avatar */
+.pc-avatar-content {
+    position: relative;
+    overflow: hidden;
+    /* Ensure shine doesn't overflow the container */
+    border-radius: 16px;
+}
+
+.pc-avatar-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    animation: autoShineAvatar 4s infinite;
+    z-index: 10;
+    pointer-events: none;
+}
+
+@keyframes autoShineAvatar {
+
+    0%,
+    65% {
+        left: -150%;
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        left: 200%;
+        opacity: 0;
+    }
 }
 
 .pc-card.interacting .avatar {
@@ -315,5 +409,33 @@ body.welcome-done .hero-image-content {
 
     .avatar {
         height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 2.5rem);
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pc-card-wrapper {
+        width: 100%;
+        max-width: 280px;
+        height: 400px;
+        /* Slightly shorter on small screens */
+    }
+
+    .avatar {
+        height: 180px;
     }
 }

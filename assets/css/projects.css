@@ -166,3 +166,35 @@
     gap: 10px;
     margin-top: 15px;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .filter-btn {
+        padding: 6px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-img-wrapper {
+        height: 140px;
+    }
+
+    .project-info h3 {
+        font-size: 1rem;
+    }
+
+    .filter-container {
+        gap: 6px;
+    }
+
+    .filter-btn {
+        padding: 5px 12px;
+        font-size: 0.8rem;
+    }
+}

@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Eksekusi email (Akan jalan di server hosting)
-    $to = "email_anda@gmail.com";
+    $to = "nosaclp4@gmail.com";
     $email_subject = "Portfolio: $subject";
 
     $email_body = "Name: $name\n" .

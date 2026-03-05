@@ -354,6 +354,7 @@
     font-weight: 600;
     color: #fff;
     line-height: 1.2;
+    transition: all 0.4s ease;
 }
 
 @media (min-width: 768px) {
@@ -375,8 +376,54 @@
 .expText-desc li {
     font-size: 0.95rem;
     line-height: 1.6;
+    transition: all 0.4s ease;
 }
 
+/* Cursor-following Text Glow Effect */
+.text-glow-cursor {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    cursor: default;
+}
+
+.text-glow-cursor::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient: Pure Purple Glow */
+    background: radial-gradient(circle 60px at var(--x, 50%) var(--y, 50%),
+            #e9d5ff 0%,
+            #c084fc 40%,
+            transparent 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.text-glow-cursor:hover::before {
+    opacity: 1;
+}
+
+.expText-desc li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    transition: all 0.4s ease;
+}
+
+.expText-desc li:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    transform: translateX(5px);
+    cursor: default;
+}
 
 /* ------------------------------------------- */
 .service-item {
@@ -524,5 +571,32 @@
 
     .bio-paragraph {
         font-size: 1.05rem;
+    }
+
+    /* Mobile Timeline Fixes */
+    .timeline-container {
+        margin-top: 2rem;
+    }
+
+    .timeline-mask-wrapper {
+        margin-right: 1rem;
+    }
+
+    .expText {
+        gap: 1rem;
+    }
+
+    .timeline-logo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .timeline-logo i {
+        width: 16px;
+        height: 16px;
+    }
+
+    .expText-title {
+        font-size: 1.15rem;
     }
 }

@@ -245,3 +245,48 @@ textarea.floating-input:not(:placeholder-shown)~.floating-label {
     position: relative;
     z-index: 1;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .contact-grid {
+        gap: 2rem;
+    }
+
+    .contact-form-col {
+        padding: 1.5rem !important;
+        border-radius: 16px;
+    }
+
+    .social-mini-grid {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-info-card {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .contact-info-card .icon-circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .contact-info-card p {
+        font-size: 0.95rem;
+    }
+
+    .contact-form-col {
+        padding: 1.2rem !important;
+    }
+
+    .floating-input {
+        font-size: 0.9rem;
+    }
+
+    .btn-intensive {
+        font-size: 0.95rem;
+        padding: 0.9rem 1.2rem;
+    }
+}

@@ -18,7 +18,7 @@
             </a>
         </div>
         <p style="color: var(--text-muted); font-size: 0.9rem;">
-            &copy; <?= date('Y') ?> Arnanda Setya Nosa Putra. Dirancang & Dibangun dengan <i data-lucide="heart" class="icon-sm" style="display:inline-block; color:var(--primary); margin: 0 2px;"></i> menggunakan PHP & JS.
+            &copy; <?= date('Y') ?> Arnanda Setya Nosa Putra.
         </p>
     </div>
 </footer>

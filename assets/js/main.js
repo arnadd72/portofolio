@@ -345,33 +345,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reveals.forEach(r => observer.observe(r));
 
-    // --- 8. PROJECT FILTER ANIMATION ---
+    // --- 8. PROJECT FILTER ANIMATION (ENHANCED) ---
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projects = document.querySelectorAll('.project-card');
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            if (btn.classList.contains('active')) return;
+            
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             const val = btn.getAttribute('data-filter');
             
-            projects.forEach(p => {
-                p.style.opacity = '0';
-                p.style.transform = 'scale(0.9)';
-                
-                setTimeout(() => {
-                    if (val === 'all' || p.getAttribute('data-category') === val) {
-                        p.style.display = 'flex';
-                        setTimeout(() => {
-                            p.style.opacity = '1';
-                            p.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        p.style.display = 'none';
+            if (typeof gsap !== 'undefined') {
+                // Animate out all cards smoothly
+                gsap.to(projects, {
+                    scale: 0.8,
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        let visibleProjects = [];
+                        projects.forEach(p => {
+                            if (val === 'all' || p.getAttribute('data-category') === val) {
+                                p.style.display = 'flex';
+                                visibleProjects.push(p);
+                            } else {
+                                p.style.display = 'none';
+                            }
+                        });
+                        
+                        // Animate in visible cards with a stagger effect
+                        if (visibleProjects.length > 0) {
+                            gsap.fromTo(visibleProjects, 
+                                { scale: 0.8, y: 30, opacity: 0 },
+                                { scale: 1, y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }
+                            );
+                        }
                     }
-                }, 300);
-            });
+                });
+            } else {
+                // Vanilla fallback
+                projects.forEach(p => {
+                    p.style.opacity = '0';
+                    p.style.transform = 'scale(0.9)';
+                    
+                    setTimeout(() => {
+                        if (val === 'all' || p.getAttribute('data-category') === val) {
+                            p.style.display = 'flex';
+                            setTimeout(() => {
+                                p.style.opacity = '1';
+                                p.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            p.style.display = 'none';
+                        }
+                    }, 300);
+                });
+            }
         });
     });
 
@@ -435,6 +468,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (hamburger) hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('show');
+        hamburger.classList.toggle('active');
+        document.body.classList.toggle('no-scroll');
+    });
+
+    // Close menu when a link is clicked
+    const navItems = navLinks.querySelectorAll('a');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navLinks.classList.remove('show');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
     });
     
     // Enforce dark mode as absolute default if no preference is saved
@@ -570,6 +615,26 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.addEventListener('mouseleave', () => {
             btn.style.setProperty('--x', 50);
             btn.style.setProperty('--y', 50);
+        });
+    });
+
+    // --- 12.5 TEXT GLOW CURSOR EFFECT ---
+    const textGlows = document.querySelectorAll('.text-glow-cursor');
+    textGlows.forEach(textEl => {
+        textEl.addEventListener('mousemove', (e) => {
+            const rect = textEl.getBoundingClientRect();
+            // Calculate mouse position relative to the text element in pixels
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            textEl.style.setProperty('--x', `${x}px`);
+            textEl.style.setProperty('--y', `${y}px`);
+        });
+        
+        textEl.addEventListener('mouseleave', () => {
+            // Optional: reset to center or let it stay at last position
+            textEl.style.setProperty('--x', `50%`);
+            textEl.style.setProperty('--y', `50%`);
         });
     });
 
