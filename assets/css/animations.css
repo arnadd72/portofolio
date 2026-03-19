@@ -1,7 +1,7 @@
-/* assets/css/animations.css */
 
-/* --- Advanced Scroll Reveals --- */
-/* Common transition property for all reveals */
+
+
+
 .reveal-up,
 .reveal-down,
 .reveal-left,
@@ -12,7 +12,7 @@
     transition: opacity 1.5s cubic-bezier(0.33, 1, 0.68, 1), transform 1.5s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-/* Base Transforms */
+
 .reveal-up {
     transform: translateY(30px);
 }
@@ -39,7 +39,7 @@
     transition: opacity 1.5s cubic-bezier(0.33, 1, 0.68, 1), transform 1.5s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-/* Active States */
+
 .reveal-up.active,
 .reveal-down.active,
 .reveal-left.active,
@@ -58,7 +58,7 @@
     transform: perspective(1000px) rotateX(0deg) scale(1);
 }
 
-/* Stagger Delays */
+
 .delay-100 {
     transition-delay: 100ms;
 }

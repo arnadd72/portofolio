@@ -1,5 +1,4 @@
 <?php
-// includes/footer.php
 ?>
 <footer class="glass footer text-center p-2 mt-4 reveal-up">
     <div class="container" style="padding: 30px 0;">
@@ -27,11 +26,9 @@
 
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
-    // Inisialisasi Lucide agar tag <i> berubah jadi SVG
     lucide.createIcons();
 </script>
 
-<!-- AOS Script -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({

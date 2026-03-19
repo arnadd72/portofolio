@@ -1,25 +1,23 @@
-/* assets/css/space.css */
 
-/* --- 1. PREMIUM BACKGROUND (GELAP PEKAT + POJOK GRADASI) --- */
+
+
 .galaxy-bg {
     position: fixed;
     inset: 0;
     z-index: -3;
-    /* Warna dasar gelap pekat */
+    
     background-color: #090e17;
     overflow: hidden;
 }
 
-/* 1A. Efek Cahaya Kursor (Mouse Tracking) - Dihapus sesuai permintaan */
 
-/* 1B. Floating Glow Orbs (Cahaya di pojok) */
+
+
 .galaxy-bg::after {
     content: '';
     position: absolute;
     inset: 0;
-    /* Dikembalikan ke 0% 0% (kiri atas) dan 100% 100% (kanan bawah).
-       Radius diperbesar jadi 700px dan opacity dinaikkan agar terlihat.
-    */
+    
     background:
         radial-gradient(700px circle at 0% 0%,
             rgba(188, 19, 254, 0.25), transparent 70%),
@@ -42,7 +40,7 @@
     }
 }
 
-/* --- 2. INTERACTIVE 3D ASTRONAUT (WELCOME CARD) --- */
+
 .welcome-3d-wrapper {
     flex: 1;
     position: relative;
@@ -88,7 +86,7 @@
     }
 }
 
-/* --- 3. INTERACTIVE 3D PLANET (HERO SECTION) --- */
+
 .css-saturn-container {
     position: relative;
     width: 100%;

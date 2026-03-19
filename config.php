@@ -1,5 +1,4 @@
 <?php
-// config.php
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
@@ -14,7 +13,6 @@ try {
     ];
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
 } catch (\PDOException $e) {
-    // Di production, jangan tampilkan pesan error detail ke user
     error_log($e->getMessage());
     exit('Database connection failed. Please try again later.');
 }

@@ -1,4 +1,4 @@
-/* assets/css/projects.css */
+
 .filter-container {
     display: flex;
     justify-content: center;
@@ -38,12 +38,12 @@
     overflow: hidden;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.02);
-    /* Extremely subtle dark glass */
+    
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transition: opacity 1.5s cubic-bezier(0.33, 1, 0.68, 1), transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease, background 0.5s ease;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    /* Barely visible border */
+    
     transform-style: preserve-3d;
     position: relative;
     top: 0;
@@ -52,12 +52,12 @@
 
 .project-card:hover {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
-    /* Lift up slightly for 3D effect */
+    
     transform: translateY(-8px) scale(1.02) perspective(1000px) rotateX(2deg) rotateY(-2deg);
-    /* Soft glowing shadow, relying on purple highlight */
+    
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(192, 132, 252, 0.15);
     border-color: rgba(192, 132, 252, 0.3);
-    /* Purple tinted border on hover */
+    
     background: rgba(255, 255, 255, 0.04);
     z-index: 10;
 }
@@ -141,7 +141,7 @@
 
 .project-card:hover .tag {
     background: rgba(192, 132, 252, 0.1);
-    /* Subtle purple */
+    
     color: #e879f9;
     border-color: rgba(192, 132, 252, 0.3);
 }
@@ -167,7 +167,7 @@
     margin-top: 15px;
 }
 
-/* Mobile Responsive */
+
 @media (max-width: 768px) {
     .project-grid {
         grid-template-columns: 1fr;

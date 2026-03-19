@@ -35,7 +35,7 @@
     transform: scale(0.8) translateY(50px);
 }
 
-/* KUNCI ANTI-STUCK: Animasi masuk dikendalikan oleh class di body */
+
 body.welcome-done .hero-text-content {
     animation: slideInLeft 1s ease-out 0.2s forwards;
 }
@@ -82,7 +82,7 @@ body.welcome-done .hero-image-content {
     gap: 20px;
 }
 
-/* --- NEW INTERACTIVE PROFILE CARD --- */
+
 :root {
     --pointer-x: 50%;
     --pointer-y: 50%;
@@ -148,7 +148,7 @@ body.welcome-done .hero-image-content {
     transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) scale3d(1, 1, 1);
     will-change: transform, filter;
     background: var(--bg-main, #0b1120);
-    /* Fallback */
+    
     box-shadow:
         0 10px 40px -10px rgba(0, 0, 0, 0.5),
         0 0 20px -5px rgba(20, 184, 166, 0.2);
@@ -159,7 +159,7 @@ body.welcome-done .hero-image-content {
     transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) scale3d(1.02, 1.02, 1.02);
 }
 
-/* Before for behind gradient */
+
 .pc-card::before {
     content: "";
     position: absolute;
@@ -180,12 +180,12 @@ body.welcome-done .hero-image-content {
     initial-value: 0turn;
 }
 
-/* Automated Glowing Border */
+
 .pc-card::after {
     content: "";
     position: absolute;
     inset: -2px;
-    /* Lebar garis glow */
+    
     border-radius: calc(var(--card-radius) + 2px);
     background: conic-gradient(from var(--border-angle),
             transparent 5%,
@@ -195,7 +195,7 @@ body.welcome-done .hero-image-content {
     z-index: 0;
     pointer-events: none;
     padding: 2px;
-    /* Sama dengan inset */
+    
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -210,7 +210,7 @@ body.welcome-done .hero-image-content {
     }
 }
 
-/* Inside container */
+
 .pc-inside {
     position: relative;
     width: 100%;
@@ -224,7 +224,7 @@ body.welcome-done .hero-image-content {
     flex-direction: column;
 }
 
-/* Inner Gradient via ::after */
+
 .pc-inside::after {
     content: "";
     position: absolute;
@@ -239,7 +239,7 @@ body.welcome-done .hero-image-content {
     mix-blend-mode: overlay;
 }
 
-/* Shine effect */
+
 .pc-shine {
     position: absolute;
     inset: 0;
@@ -253,7 +253,7 @@ body.welcome-done .hero-image-content {
     border-radius: var(--card-radius);
 }
 
-/* Glare effect */
+
 .pc-glare {
     position: absolute;
     inset: 0;
@@ -269,7 +269,7 @@ body.welcome-done .hero-image-content {
     border-radius: var(--card-radius);
 }
 
-/* Content layout */
+
 .pc-content {
     position: relative;
     z-index: 5;
@@ -296,11 +296,11 @@ body.welcome-done .hero-image-content {
     overflow: hidden;
 }
 
-/* Automatic Shine Effect over Avatar */
+
 .pc-avatar-content {
     position: relative;
     overflow: hidden;
-    /* Ensure shine doesn't overflow the container */
+    
     border-radius: 16px;
 }
 
@@ -432,7 +432,7 @@ body.welcome-done .hero-image-content {
         width: 100%;
         max-width: 280px;
         height: 400px;
-        /* Slightly shorter on small screens */
+        
     }
 
     .avatar {

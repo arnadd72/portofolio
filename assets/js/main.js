@@ -1,19 +1,13 @@
-// assets/js/main.js
-
-// --- 0. FORCE SCROLL TO TOP ON REFRESH ---
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 
-// Clear hash if present to prevent browser jumping to sections
 if (window.location.hash) {
     window.history.replaceState('', document.title, window.location.pathname + window.location.search);
 }
 
-// Immediately scroll to top
 window.scrollTo(0, 0);
 
-// Force scroll to top when everything (including images/CSS) finishes loading
 window.addEventListener('load', () => {
     setTimeout(() => {
         window.scrollTo(0, 0);
@@ -23,19 +17,17 @@ window.addEventListener('load', () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Scroll to top during early DOM parsing
     window.scrollTo(0, 0);
-    // --- 1. ASTRONAUT 3D WELCOME SCREEN SUTRADARA ---
+
     const welcomeScreen = document.getElementById('welcome-screen');
     const welcomeProgress = document.getElementById('welcome-progress');
     const welcomePercent = document.getElementById('welcome-percent');
     
     if (welcomeScreen && welcomeProgress && welcomePercent) {
-        // Kunci scroll saat welcome screen aktif
         document.body.classList.add('no-scroll');
         
         let progress = 0;
-        const duration = 3000; // 3 seconds loading simulation
+        const duration = 3000;
         const intervalTime = 30;
         const increment = (100 / (duration / intervalTime));
         
@@ -48,42 +40,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById('welcome-status')
                     .textContent = "Launch successful.";
                 
-                // Menunggu sejenak setelah 100% lalu hilangkan welcome screen
                 setTimeout(() => {
-                    // Mengaktifkan CSS transition fade + blur
                     welcomeScreen.classList.add('exit'); 
                     
                     setTimeout(() => {
                         welcomeScreen.style.display = 'none';
                         document.body.classList.remove('no-scroll');
                         
-                        // KUNCI RAHASIA: Memulai GSAP animasi website utama
                         document.body.classList.add('welcome-done');
                         startHeroTyping();
                     }, 800);
                 }, 800);
             }
             
-            // Update UI elements
             welcomeProgress.style.width = `${progress}%`;
             welcomePercent.textContent = `${Math.floor(progress)}%`;
             
         }, intervalTime);
 
     } else {
-        // Jika tidak ada welcome screen, langsung jalankan web utama
         document.body.classList.add('welcome-done');
         startHeroTyping();
     }
 
-    // --- 2. FUNGSI TYPING UNTUK HERO SECTION & GSAP ANIMATION ---
     function startHeroTyping() {
         
-        // --- GSAP TIMELINE ---
         if (typeof gsap !== 'undefined') {
             const tl = gsap.timeline();
             
-            // 1. Reveal text elements one by one from top to bottom
             tl.to('.gsap-reveal', {
                 y: 0,
                 opacity: 1,
@@ -92,19 +76,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 ease: 'power3.out'
             });
 
-            // 2. Reveal the 3D Spline viewer with a smooth pop effect
             tl.to('.gsap-reveal-3d', {
                 scale: 1,
                 y: 0,
                 opacity: 1,
                 duration: 1.2,
                 ease: 'back.out(1.5)'
-            }, "-=0.6"); // overlap slightly with text animation
+            }, "-=0.6");
             
-            // 3. Start typing effect after the text containers are visible
             tl.call(initTypingEffect);
         } else {
-            // Fallback: Show elements instantly if GSAP fails to load
             document.querySelectorAll('.gsap-reveal, .gsap-reveal-3d')
                 .forEach(el => {
                     el.style.opacity = 1;
@@ -138,11 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 let typeSpeed = isDeleting ? 50 : 100;
 
                 if (!isDeleting && charIndex === currentRole.length) {
-                    // Pause at the end of the word
                     typeSpeed = 2000;
                     isDeleting = true;
                 } else if (isDeleting && charIndex === 0) {
-                    // Move to next word when deleted
                     isDeleting = false;
                     roleIndex = (roleIndex + 1) % roles.length;
                     typeSpeed = 500;
@@ -155,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- 2.5 ROTATING QUOTES ---
     const quotes = [
         { 
             text: '"Satu-satunya cara untuk melakukan pekerjaan hebat adalah dengan mencintai apa yang Anda lakukan."', 
@@ -177,24 +155,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (quoteContainer && quoteTextSpan && quoteAuthorSpan) {
         setInterval(() => {
-            // Fade out
             quoteContainer.style.opacity = '0';
             
             setTimeout(() => {
-                // Change text while invisible
                 quoteIndex = (quoteIndex + 1) % quotes.length;
                 quoteTextSpan.textContent = quotes[quoteIndex].text;
                 quoteAuthorSpan.textContent = quotes[quoteIndex].author;
                 
-                // Fade in
                 quoteContainer.style.opacity = '1';
-            }, 800); // match the CSS transition duration
-        }, 8000); // change every 5 seconds
+            }, 800);
+        }, 8000);
     }
 
-    // --- 3. (CURSOR REMOVED - USING DEFAULT BROWSER CURSOR) ---
-
-    // --- 4. MAGNETIC BUTTONS ---
     const magneticEls = document.querySelectorAll('.magnetic-el, .btn');
     magneticEls.forEach(el => {
         el.addEventListener('mousemove', (e) => {
@@ -209,7 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 5. VANILLA 3D TILT EFFECT ---
     const tiltCards = document.querySelectorAll('.glass-tilt');
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -239,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 5.5 ADVANCED 3D PROFILE CARD EFFECT ---
     const profileCard = document.getElementById('profile-card');
     const profileCardWrapper = document.getElementById('profile-card-wrapper');
     
@@ -273,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
             profileCard.style.setProperty('--pointer-from-top', 
                 clamp(topY / bounds.height, 0, 1));
             
-            // Adjust sensitivity below. Lower multiple = less rotation.
             profileCard.style.setProperty('--rotate-x', 
                 `${(center.y / 100) * -15}deg`);
             profileCard.style.setProperty('--rotate-y', 
@@ -300,7 +269,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 6. SCROLL PROGRESS & PARALLAX HERO ---
     const progressBar = document.getElementById('scrollProgress');
     const heroContent = document.querySelector('.hero-text-content'); 
     
@@ -320,7 +288,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 7. SCROLL REVEAL & SKILL BARS ---
     const reveals = document.querySelectorAll(
         '.reveal, .reveal-up, .reveal-down, .reveal-left, ' +
         '.reveal-right, .reveal-scale, .reveal-flip, ' +
@@ -337,7 +304,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
             } else {
-                // Remove active class when out of view so it animates again!
                 entry.target.classList.remove('active');
             }
         });
@@ -345,7 +311,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reveals.forEach(r => observer.observe(r));
 
-    // --- 8. PROJECT FILTER ANIMATION (ENHANCED) ---
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projects = document.querySelectorAll('.project-card');
 
@@ -359,7 +324,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const val = btn.getAttribute('data-filter');
             
             if (typeof gsap !== 'undefined') {
-                // Animate out all cards smoothly
                 gsap.to(projects, {
                     scale: 0.8,
                     y: 20,
@@ -377,7 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         });
                         
-                        // Animate in visible cards with a stagger effect
                         if (visibleProjects.length > 0) {
                             gsap.fromTo(visibleProjects, 
                                 { scale: 0.8, y: 30, opacity: 0 },
@@ -387,7 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             } else {
-                // Vanilla fallback
                 projects.forEach(p => {
                     p.style.opacity = '0';
                     p.style.transform = 'scale(0.9)';
@@ -408,7 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 9. AJAX CONTACT FORM ---
     const form = document.getElementById('contactForm');
     const btnSubmit = document.getElementById('submitBtn');
     if (form) {
@@ -459,7 +420,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 10. THEME, HAMBURGER & STICKY NAVBAR ---
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.querySelector('.nav-links');
     const themeBtn = document.getElementById('theme-toggle');
@@ -472,7 +432,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.toggle('no-scroll');
     });
 
-    // Close menu when a link is clicked
     const navItems = navLinks.querySelectorAll('a');
     navItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -482,14 +441,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    // Enforce dark mode as absolute default if no preference is saved
     if (localStorage.getItem('theme') === 'light') {
         html.setAttribute('data-theme', 'light');
     } else {
-        html.removeAttribute('data-theme'); // default to dark
+        html.removeAttribute('data-theme');
     }
     
-    // Set initial icon state
     function updateThemeIcon() {
         if (!themeBtn) return;
         const currentTheme = html.getAttribute('data-theme');
@@ -524,7 +481,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 11. INITIALIZE TSPARTICLES (Meteor Shower / Starfall) ---
     if (typeof tsParticles !== 'undefined') {
         tsParticles.load("tsparticles", {
             background: {
@@ -535,7 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 events: {
                     onHover: {
                         enable: true,
-                        mode: "repulse", // Meteors scatter when cursor approaches
+                        mode: "repulse",
                     },
                     resize: true,
                 },
@@ -568,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         enable: true,
                         area: 800,
                     },
-                    value: 120, // Optimized for smooth 60fps
+                    value: 120,
                 },
                 opacity: {
                     value: { min: 0.5, max: 1 },
@@ -590,18 +546,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 12. GOOEY BUTTON EFFECT ---
     const gooeyBtns = document.querySelectorAll('.gooey-btn'); 
     
     gooeyBtns.forEach(btn => {
-        // Tambahkan div gooey-bg ke dalam tombol
         if (!btn.querySelector('.gooey-bg')) {
             const bg = document.createElement('div');
             bg.className = 'gooey-bg';
             btn.appendChild(bg);
         }
 
-        // Lacak kursor mouse
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -611,19 +564,16 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.style.setProperty('--y', y);
         });
 
-        // Kembalikan ke tengah saat mouse pergi
         btn.addEventListener('mouseleave', () => {
             btn.style.setProperty('--x', 50);
             btn.style.setProperty('--y', 50);
         });
     });
 
-    // --- 12.5 TEXT GLOW CURSOR EFFECT ---
     const textGlows = document.querySelectorAll('.text-glow-cursor');
     textGlows.forEach(textEl => {
         textEl.addEventListener('mousemove', (e) => {
             const rect = textEl.getBoundingClientRect();
-            // Calculate mouse position relative to the text element in pixels
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
@@ -632,17 +582,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         
         textEl.addEventListener('mouseleave', () => {
-            // Optional: reset to center or let it stay at last position
             textEl.style.setProperty('--x', `50%`);
             textEl.style.setProperty('--y', `50%`);
         });
     });
 
-    // --- 13. TIMELINE GSAP ANIMATION ---
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Animate each timeline card coming in from left
         gsap.utils.toArray(".timeline-card").forEach((card) => {
             gsap.from(card, {
                 xPercent: -50,
@@ -657,7 +604,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Animate the timeline mask as user scrolls
         gsap.utils.toArray(".timeline").forEach((timeline) => {
             gsap.to(timeline, {
                 transformOrigin: "bottom bottom",
@@ -675,11 +621,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Animate expText elements
         gsap.utils.toArray(".expText").forEach((text) => {
             gsap.from(text, {
                 opacity: 0,
-                /* Slight translation instead of xPercent: 0 for smoother effect */
                 x: 20, 
                 duration: 1,
                 ease: "power2.inOut",
@@ -691,7 +635,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 15. CONTACT FORM AJAX EMAIL SENDER ---
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function (e) {

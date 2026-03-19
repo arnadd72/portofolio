@@ -1,5 +1,4 @@
 <?php
-// includes/header.php
 ?>
 <!DOCTYPE html>
 <html lang="id" data-theme="dark">
@@ -11,7 +10,6 @@
 
     <link rel="stylesheet" href="assets/css/main.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/animations.css?v=<?= time(); ?>">
-    <!-- AOS Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/welcome.css?v=<?= time(); ?>">
     <link rel="stylesheet" href="assets/css/home.css?v=<?= time(); ?>">
@@ -37,9 +35,6 @@
                 <a href="#tech" class="nav-link">Tech</a>
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#contact" class="nav-link">Contact</a>
-                <button id="theme-toggle" class="btn-icon magnetic-el">
-                    <i data-lucide="moon" class="icon-sm"></i>
-                </button>
             </nav>
             <button class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>

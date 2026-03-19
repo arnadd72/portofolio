@@ -1,11 +1,8 @@
 <?php
-// api/contact.php
-
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Cek Honeypot
     if (!empty($_POST['honeypot'])) {
         echo json_encode([
             'status' => 'error',
@@ -14,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Sanitasi
     $name = htmlspecialchars(strip_tags(trim($_POST['name'] ?? '')));
     $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
     $subject = htmlspecialchars(strip_tags(trim($_POST['subject'] ?? '')));
@@ -36,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Eksekusi email (Akan jalan di server hosting)
     $to = "nosaclp4@gmail.com";
     $email_subject = "Portfolio: $subject";
 

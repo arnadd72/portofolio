@@ -1,4 +1,4 @@
-/* assets/css/welcome.css */
+
 
 body.no-scroll {
     overflow: hidden;
@@ -8,7 +8,7 @@ body.no-scroll {
     position: fixed;
     inset: 0;
     background: #090e17;
-    /* Lebih gelap agar neon menonjol */
+    
     z-index: 999999;
     display: flex;
     justify-content: center;
@@ -23,7 +23,7 @@ body.no-scroll {
     pointer-events: none;
 }
 
-/* Latar Belakang Cahaya Neon */
+
 .welcome-bg-glow {
     position: absolute;
     border-radius: 50%;
@@ -36,7 +36,7 @@ body.no-scroll {
     width: 600px;
     height: 600px;
     background: #bc13fe;
-    /* Neon Purple */
+    
     top: -150px;
     left: -100px;
 }
@@ -45,13 +45,13 @@ body.no-scroll {
     width: 500px;
     height: 500px;
     background: #00ffa3;
-    /* Neon Green */
+    
     bottom: -100px;
     right: -100px;
     animation-delay: 2s;
 }
 
-/* Base Card Layout */
+
 .welcome-card {
     position: relative;
     z-index: 10;
@@ -62,7 +62,7 @@ body.no-scroll {
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(188, 19, 254, 0.15);
-    /* Border ungu transparan */
+    
     border-radius: 24px;
     display: flex;
     flex-direction: row;
@@ -75,7 +75,7 @@ body.no-scroll {
     animation: cardEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Typography Consistency (Menggunakan font dari index.php) */
+
 .font-tech {
     font-family: 'Space Grotesk', sans-serif;
 }
@@ -112,7 +112,7 @@ body.no-scroll {
     margin-bottom: 20px;
 }
 
-/* Teks Gradasi Neon Purple & Green dengan Shadow */
+
 .text-gradient-neon {
     background: linear-gradient(135deg, #bc13fe 10%, #00ffa3 90%);
     background-clip: text;
@@ -121,7 +121,7 @@ body.no-scroll {
     display: inline-block;
 }
 
-/* Efek Glow Berdetak pada Teks */
+
 .neon-pulse {
     animation: textGlow 3s ease-in-out infinite alternate;
 }
@@ -140,7 +140,7 @@ body.no-scroll {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* Loading Bar & Text */
+
 .welcome-loading-area {
     margin-top: auto;
 }
@@ -177,7 +177,7 @@ body.no-scroll {
     font-weight: 700;
 }
 
-/* --- ANIMASI OBJEK 3D --- */
+
 .welcome-3d-wrapper {
     flex: 1;
     position: relative;
@@ -221,7 +221,7 @@ body.no-scroll {
     animation: floatCrystal 3s ease-in-out infinite alternate;
 }
 
-/* --- KEYFRAMES ANIMASI BARU (Lebih Memukau) --- */
+
 @keyframes cardEntrance {
     0% {
         transform: translateY(60px) scale(0.9);
@@ -236,7 +236,7 @@ body.no-scroll {
     }
 }
 
-/* Animasi Teks: Blur menjadi Tajam (Sangat Premium) */
+
 .anim-blur-reveal {
     opacity: 0;
     transform: translateY(20px);
@@ -291,7 +291,7 @@ body.no-scroll {
     }
 }
 
-/* Delays */
+
 .delay-1 {
     animation-delay: 0.4s;
 }
@@ -308,7 +308,7 @@ body.no-scroll {
     animation-delay: 1.3s;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
     .welcome-card {
         flex-direction: column-reverse;

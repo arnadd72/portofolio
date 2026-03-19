@@ -1,4 +1,4 @@
-/* assets/css/about.css */
+
 
 .about-content-wrapper {
     width: 100%;
@@ -92,13 +92,13 @@
     line-height: 1.4;
 }
 
-/* Animations for communicative feel */
+
 .fade-in-text {
     opacity: 0;
     transform: translateY(20px);
 }
 
-/* We'll trigger the child animations only when the parent gets 'active' from JS reveal */
+
 .reveal.active .fade-in-text,
 .reveal-up.active .fade-in-text,
 .reveal-down.active .fade-in-text,
@@ -116,7 +116,7 @@
     }
 }
 
-/* Quick Facts */
+
 .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -133,9 +133,9 @@
     }
 }
 
-/* ---------- NEW TIMELINE LAYOUT ---------- */
 
-/* The card style based on GlowCard React Component & CSS provided */
+
+
 :root {
     --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
 }
@@ -148,10 +148,10 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     background: #0e0e10;
-    /* --color-black-100 */
+    
 }
 
-/* Duplicated mask and conic glow from old layout removed to let glow.css take over natively */
+
 
 .timeline-card-glow-inner {
     height: 100%;
@@ -162,7 +162,7 @@
     border-radius: 12px;
 }
 
-/* Image Hover Zoom Effect inside glow cards */
+
 .timeline-card-glow-inner img {
     transition: transform 0.5s ease;
 }
@@ -177,7 +177,7 @@
     color: var(--primary);
 }
 
-/* Layout logic */
+
 .timeline-container {
     margin-top: 3rem;
     max-width: 900px;
@@ -256,20 +256,19 @@
 @media (min-width: 1024px) {
     .timeline-mask-wrapper {
         transform: translateX(-50%);
-        /* perfectly centers it between left and right side due to 50% split width */
+        
         margin-left: 0;
     }
 }
 
 .timeline {
-    /* The Mask */
+    
     position: absolute;
     z-index: 30;
     height: 110%;
     top: -10px;
     width: 100%;
-    /* We use the glass container's background color or similar to mask it out smoothly. 
-     Since the main container has a glass backdrop, we will try to match var(--bg-surface) */
+    
     background: var(--bg-surface);
     border-radius: 4px;
     backdrop-filter: blur(16px);
@@ -277,7 +276,7 @@
 
 .gradient-line {
     width: 4px;
-    /* w-1 */
+    
     height: 100%;
     background: linear-gradient(0deg,
             rgba(69, 222, 196, 0) 0%,
@@ -379,7 +378,7 @@
     transition: all 0.4s ease;
 }
 
-/* Cursor-following Text Glow Effect */
+
 .text-glow-cursor {
     position: relative;
     display: inline-block;
@@ -394,7 +393,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    /* Gradient: Pure Purple Glow */
+    
     background: radial-gradient(circle 60px at var(--x, 50%) var(--y, 50%),
             #e9d5ff 0%,
             #c084fc 40%,
@@ -425,7 +424,7 @@
     cursor: default;
 }
 
-/* ------------------------------------------- */
+
 .service-item {
     display: flex;
     align-items: flex-start;
@@ -573,7 +572,7 @@
         font-size: 1.05rem;
     }
 
-    /* Mobile Timeline Fixes */
+    
     .timeline-container {
         margin-top: 2rem;
     }
